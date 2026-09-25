@@ -1,0 +1,122 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 94px 0 86px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  align-items: center;
+  gap: 72px;
+}
+
+.copy {
+  max-width: 850px;
+}
+
+.copy h1 {
+  max-width: 900px;
+}
+
+.copy p {
+  max-width: 700px;
+  margin-top: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.visual {
+  position: relative;
+  min-height: 320px;
+}
+
+.ringOne,
+.ringTwo {
+  position: absolute;
+  border: 1px solid rgba(11,22,43,.14);
+  border-radius: 50%;
+}
+
+.ringOne {
+  inset: 18px 14px;
+  animation: orbit 14s linear infinite;
+}
+
+.ringTwo {
+  inset: 68px 64px;
+  border-style: dashed;
+  animation: orbit 10s linear infinite reverse;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 90px;
+  height: 90px;
+  place-items: center;
+  color: var(--color-navy);
+  border-radius: 28px;
+  background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold));
+  box-shadow: var(--shadow-soft);
+  font-size: 44px;
+  transform: translate(-50%,-50%) rotate(-5deg);
+}
+
+.card {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  width: 210px;
+  padding: 17px;
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  background: rgba(255,255,255,.88);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+}
+
+.card span,
+.card strong {
+  display: block;
+}
+
+.card span {
+  color: var(--color-muted);
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+}
+
+.card strong {
+  margin-top: 4px;
+  color: var(--color-navy);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.card i {
+  display: block;
+  height: 5px;
+  margin-top: 14px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--color-gold) 70%, #e8edf3 70%);
+}
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 900px) {
+  .inner { grid-template-columns: 1fr; }
+  .visual { min-height: 280px; }
+}

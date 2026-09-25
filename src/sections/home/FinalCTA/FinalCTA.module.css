@@ -1,0 +1,118 @@
+.box {
+  position: relative;
+  overflow: hidden;
+  padding: 72px;
+  border-radius: 36px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(36,183,216,.22), transparent 28%),
+    radial-gradient(circle at 14% 90%, rgba(201,154,74,.23), transparent 28%),
+    #071225;
+}
+
+.box h2 {
+  max-width: 760px;
+  color: #fff;
+}
+
+.box p {
+  max-width: 650px;
+  margin-top: 20px;
+  color: rgba(255,255,255,.65);
+}
+
+.box :global(.eyebrow) {
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.textLink {
+  color: rgba(255,255,255,.8);
+}
+
+.textLink:hover {
+  color: #fff;
+}
+
+.radar {
+  position: absolute;
+  top: 50%;
+  right: 90px;
+  width: 220px;
+  height: 220px;
+  transform: translateY(-50%);
+}
+
+.radar span {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 50%;
+}
+
+.radar span:nth-child(2) { inset: 34px; }
+.radar span:nth-child(3) { inset: 68px; }
+
+.radar span {
+  animation: ringPulse 3.6s ease-out infinite;
+}
+
+.radar span:nth-child(2) { animation-delay: -1.2s; }
+.radar span:nth-child(3) { animation-delay: -2.4s; }
+
+.sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg 290deg, rgba(36,183,216,.08) 330deg, rgba(36,183,216,.3) 360deg);
+  animation: spin 6s linear infinite;
+}
+
+.radar i svg {
+  width: 28px;
+  height: 28px;
+}
+.radar i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 60px;
+  height: 60px;
+  place-items: center;
+  color: var(--color-navy);
+  border-radius: 50%;
+  background: var(--color-gold);
+  font-size: 28px;
+  font-style: normal;
+  transform: translate(-50%,-50%);
+  animation: pulseCta 2.4s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { border-color: rgba(255,255,255,.1); }
+  40% { border-color: rgba(201,154,74,.4); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseCta {
+  50% { transform: translate(-50%,-50%) scale(1.08) rotate(8deg); }
+}
+
+@media (max-width: 900px) {
+  .radar { opacity: .26; right: -40px; }
+}
+
+@media (max-width: 640px) {
+  .box { padding: 48px 24px; }
+}

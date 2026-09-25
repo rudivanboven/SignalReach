@@ -1,0 +1,21 @@
+.wrap {
+  max-width: 780px;
+}
+
+.wrap h2 {
+  max-width: 760px;
+}
+
+.wrap p {
+  max-width: 690px;
+  margin-top: 20px;
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.center :global(.eyebrow) {
+  justify-content: center;
+}
