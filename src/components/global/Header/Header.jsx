@@ -6,12 +6,7 @@ import { usePathname } from "next/navigation";
 import LogoMark from "../LogoMark/LogoMark";
 import styles from "./Header.module.css";
 
-const links = [
-  ["/", "Home"],
-  ["/how-it-works", "How It Works"],
-  ["/services", "Services"],
-  ["/about", "About"],
-];
+const disabledLinks = ["How It Works", "Services", "About"];
 
 export default function Header() {
   const pathname = usePathname();
@@ -49,24 +44,26 @@ export default function Header() {
           <span />
         </button>
         <nav className={`${styles.nav} ${open ? styles.navOpen : ""}`}>
-          {links.map(([href, label]) => (
-            <Link
-              key={href}
-              href={href}
-              className={pathname === href ? styles.active : ""}
-              onClick={() => setOpen(false)}
-            >
-              {label}
-            </Link>
-          ))}
-          <Link className={styles.mobileCta} href="/free-report" onClick={() => setOpen(false)}>
-            Get Your Free QA Report
+          <Link
+            href="/"
+            className={pathname === "/" ? styles.active : ""}
+            onClick={() => setOpen(false)}
+          >
+            Home
           </Link>
+          {disabledLinks.map((label) => (
+            <span key={label} className={styles.disabledLink} aria-disabled="true">
+              {label}
+            </span>
+          ))}
+          <span className={`${styles.mobileCta} ${styles.disabledCta}`} aria-disabled="true">
+            Get Your Free QA Report
+          </span>
         </nav>
-        <Link className={`btnPrimary ${styles.desktopCta}`} href="/free-report">
+        <span className={`btnPrimary ${styles.desktopCta} ${styles.disabledCta}`} aria-disabled="true">
           Get Your Free QA Report
           <span aria-hidden="true">↗</span>
-        </Link>
+        </span>
       </div>
     </header>
   );

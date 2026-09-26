@@ -70,8 +70,10 @@
   margin-left: auto;
 }
 
-.nav > a {
+.nav > a,
+.nav > .disabledLink {
   position: relative;
+  display: inline-block;
   padding: 9px var(--nav-pad-x);
   color: #4d5a70;
   font-size: var(--nav-font);
@@ -80,7 +82,8 @@
   transition: color 220ms ease, padding 300ms var(--ease-out), font-size 300ms var(--ease-out);
 }
 
-.nav > a::after {
+.nav > a::after,
+.nav > .disabledLink::after {
   position: absolute;
   right: var(--nav-pad-x);
   bottom: 3px;
@@ -96,11 +99,13 @@
 }
 
 .nav > a:hover,
+.nav > .disabledLink:hover,
 .nav > a.active {
   color: var(--color-navy);
 }
 
 .nav > a:hover::after,
+.nav > .disabledLink:hover::after,
 .nav > a.active::after {
   opacity: 1;
   transform: scaleX(1);
@@ -112,6 +117,11 @@
   padding: 0 var(--cta-pad) !important;
   font-size: var(--cta-font) !important;
   transition: min-height 300ms var(--ease-out), padding 300ms var(--ease-out), font-size 300ms var(--ease-out), transform 250ms ease, box-shadow 250ms ease !important;
+}
+
+.disabledLink,
+.disabledCta {
+  cursor: default;
 }
 
 .mobileCta,
@@ -175,7 +185,8 @@
     transform: translateY(0) scale(1);
   }
 
-  .nav > a {
+  .nav > a,
+  .nav > .disabledLink {
     padding: 14px 16px;
     font-size: 14px;
   }
@@ -211,5 +222,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .header, .inner, .headerLogo, .headerLogo > span, .nav > a, .desktopCta, .menuButton { transition-duration: 0.01ms !important; }
+  .header, .inner, .headerLogo, .headerLogo > span, .nav > a, .nav > .disabledLink, .desktopCta, .menuButton { transition-duration: 0.01ms !important; }
 }
