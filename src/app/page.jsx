@@ -1,6 +1,8 @@
 import Hero from "@/sections/home/Hero/Hero";
 import Stats from "@/sections/home/Stats/Stats";
 import WhatWeDo from "@/sections/home/WhatWeDo/WhatWeDo";
+import WhatWeCatch from "@/sections/home/WhatWeCatch/WhatWeCatch";
+import FindingToFix from "@/sections/home/FindingToFix/FindingToFix";
 import Process from "@/sections/home/Process/Process";
 import AuditPreview from "@/sections/home/AuditPreview/AuditPreview";
 import Technology from "@/sections/home/Technology/Technology";
@@ -12,6 +14,8 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <WhatWeDo />
+      <WhatWeCatch />
+      <FindingToFix />
       <Process />
       <AuditPreview />
       <Technology />

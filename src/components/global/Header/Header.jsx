@@ -31,7 +31,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+    <header className={`${styles.header} ${pathname === "/" ? styles.homeHeader : ""} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
         <LogoMark className={styles.headerLogo} />
         <button
