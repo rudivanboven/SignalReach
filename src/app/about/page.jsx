@@ -9,7 +9,7 @@ export const metadata = { title: "About" };
 export default function AboutPage() {
   return (
     <>
-      <InnerHero eyebrow="About SignalReach" title="We review websites from the perspective of both the user and the developer." text="SignalReach combines practical QA, design review, responsive testing, UX thinking and implementation knowledge in one clear improvement report." secondary="See What We Check" secondaryHref="/services" />
+      <InnerHero variant="about" eyebrow="About SignalReach" title="Human-Led Website QA With" accent="Real Implementation Experience." text="We review websites from both the user’s perspective and the developer’s perspective, helping teams understand what should improve and why." secondary="See What We Check" secondaryHref="/services" />
       <Story />
       <Values />
       <Technology />

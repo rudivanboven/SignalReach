@@ -9,7 +9,7 @@ export const metadata = { title: "Services" };
 export default function ServicesPage() {
   return (
     <>
-      <InnerHero eyebrow="Website QA services" title="Find the issues holding your complete website experience back." text="We inspect pages, sections and interactions across design, responsive behavior, usability and functionality—then show you what to improve." secondary="How It Works" secondaryHref="/how-it-works" />
+      <InnerHero variant="services" eyebrow="Our services" title="Complete Website QA," accent="From Design to Functionality." text="We review the parts of your website that shape the real user experience — layout, responsiveness, content, interactions and performance." secondary="How It Works" secondaryHref="/how-it-works" />
       <ServiceGrid />
       <Platforms />
       <Technology />

@@ -6,7 +6,15 @@ import { usePathname } from "next/navigation";
 import LogoMark from "../LogoMark/LogoMark";
 import styles from "./Header.module.css";
 
-const disabledLinks = ["How It Works", "Services", "About"];
+const links = [
+  ["/", "Home"],
+  ["/how-it-works", "How It Works"],
+  ["/services", "Services"],
+  ["/about", "About"],
+];
+
+// Routes whose hero is dark, so the header starts transparent over it.
+const overlayRoutes = ["/", "/how-it-works", "/services", "/about", "/free-report"];
 
 export default function Header() {
   const pathname = usePathname();
@@ -31,7 +39,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`${styles.header} ${pathname === "/" ? styles.homeHeader : ""} ${scrolled ? styles.scrolled : ""}`}>
+    <header className={`${styles.header} ${overlayRoutes.includes(pathname) ? styles.homeHeader : ""} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
         <LogoMark className={styles.headerLogo} />
         <button
@@ -44,26 +52,25 @@ export default function Header() {
           <span />
         </button>
         <nav className={`${styles.nav} ${open ? styles.navOpen : ""}`}>
-          <Link
-            href="/"
-            className={pathname === "/" ? styles.active : ""}
-            onClick={() => setOpen(false)}
-          >
-            Home
-          </Link>
-          {disabledLinks.map((label) => (
-            <span key={label} className={styles.disabledLink} aria-disabled="true">
+          {links.map(([href, label]) => (
+            <Link
+              key={href}
+              href={href}
+              className={pathname === href ? styles.active : ""}
+              aria-current={pathname === href ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
               {label}
-            </span>
+            </Link>
           ))}
-          <span className={`${styles.mobileCta} ${styles.disabledCta}`} aria-disabled="true">
+          <Link className={styles.mobileCta} href="/free-report" aria-current={pathname === "/free-report" ? "page" : undefined} onClick={() => setOpen(false)}>
             Get Your Free QA Report
-          </span>
+          </Link>
         </nav>
-        <span className={`btnPrimary ${styles.desktopCta} ${styles.disabledCta}`} aria-disabled="true">
+        <Link className={`btnPrimary ${styles.desktopCta}`} href="/free-report" aria-current={pathname === "/free-report" ? "page" : undefined}>
           Get Your Free QA Report
           <span aria-hidden="true">↗</span>
-        </span>
+        </Link>
       </div>
     </header>
   );

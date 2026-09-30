@@ -8,7 +8,7 @@ export const metadata = { title: "How It Works" };
 export default function HowItWorksPage() {
   return (
     <>
-      <InnerHero eyebrow="How SignalReach works" title="A complete website QA process, from first click to final recommendation." text="We manually review your website page by page, test it across devices, and document every important design, usability and functional issue." secondary="See What We Check" secondaryHref="/services" />
+      <InnerHero variant="process" eyebrow="How it works" title="From Website Review to" accent="a Clear Action Plan." text="A simple, human-led process that turns website issues into clear, prioritized recommendations." secondary="See What We Check" secondaryHref="/services" />
       <DetailedProcess />
       <Deliverables />
       <FinalCTA />

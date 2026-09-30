@@ -72,6 +72,10 @@
   backdrop-filter: blur(12px) saturate(135%);
 }
 
+.homeHeader:not(.scrolled) .desktopCta[aria-current="page"] {
+  border-color: rgba(241, 212, 154, 0.62);
+}
+
 .homeHeader:not(.scrolled) .desktopCta:hover {
   border-color: rgba(213, 240, 255, 0.62);
   background: rgba(31, 60, 128, 0.62);
@@ -166,6 +170,7 @@
 }
 
 .mobileCta,
+.nav > .mobileCta,
 .menuButton {
   display: none;
 }
