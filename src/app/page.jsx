@@ -1,5 +1,6 @@
 import Hero from "@/sections/home/Hero/Hero";
 import Stats from "@/sections/home/Stats/Stats";
+import WhyItMatters from "@/sections/home/WhyItMatters/WhyItMatters";
 import WhatWeDo from "@/sections/home/WhatWeDo/WhatWeDo";
 import WhatWeCatch from "@/sections/home/WhatWeCatch/WhatWeCatch";
 import FindingToFix from "@/sections/home/FindingToFix/FindingToFix";
@@ -13,6 +14,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Stats />
+      <WhyItMatters />
       <WhatWeDo />
       <WhatWeCatch />
       <FindingToFix />
