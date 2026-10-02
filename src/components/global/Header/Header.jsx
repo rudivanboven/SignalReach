@@ -8,13 +8,14 @@ import styles from "./Header.module.css";
 
 const links = [
   ["/", "Home"],
-  ["/how-it-works", "How It Works"],
-  ["/services", "Services"],
   ["/about", "About"],
+  ["/services", "Services"],
+  ["/team", "Team"],
+  ["/how-it-works", "How It Works"],
 ];
 
 // Routes whose hero is dark, so the header starts transparent over it.
-const overlayRoutes = ["/", "/how-it-works", "/services", "/about", "/free-report"];
+const overlayRoutes = ["/", "/how-it-works", "/services", "/about", "/team", "/free-report"];
 
 export default function Header() {
   const pathname = usePathname();

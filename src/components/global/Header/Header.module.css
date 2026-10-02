@@ -175,6 +175,15 @@
   display: none;
 }
 
+.nav > a { white-space: nowrap; }
+
+/* Five nav items + CTA: tighten spacing on narrow desktops so nothing wraps. */
+@media (min-width: 901px) and (max-width: 1120px) {
+  .header { --nav-font: 14px; --nav-pad-x: 8px; --cta-pad: 14px; --cta-font: 14px; }
+  .inner { gap: 14px; }
+  .nav { gap: 0; }
+}
+
 @media (max-width: 900px) {
   .menuButton {
     display: grid;

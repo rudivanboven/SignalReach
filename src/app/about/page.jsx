@@ -2,7 +2,7 @@ import InnerHero from "@/components/ui/InnerHero/InnerHero";
 import Story from "@/sections/about/Story/Story";
 import Values from "@/sections/about/Values/Values";
 import Technology from "@/sections/home/Technology/Technology";
-import FinalCTA from "@/sections/home/FinalCTA/FinalCTA";
+import HowWeThink from "@/sections/about/HowWeThink/HowWeThink";
 
 export const metadata = { title: "About" };
 
@@ -13,7 +13,7 @@ export default function AboutPage() {
       <Story />
       <Values />
       <Technology />
-      <FinalCTA />
+      <HowWeThink />
     </>
   );
 }

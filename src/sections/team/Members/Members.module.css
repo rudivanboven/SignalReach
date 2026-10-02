@@ -1,0 +1,300 @@
+/* "The people behind every review" — simple white profile cards (photo,
+   name, bio), three per row, on the dark section background. */
+
+.section {
+  --teal: #86ece0;
+  --blue: #6f96ff;
+  --gold: #f1d49a;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(72px, 5vw + 40px, 116px);
+  background:
+    radial-gradient(circle at 25% 55%, rgba(60, 110, 255, .26), transparent 42%),
+    radial-gradient(circle at 85% 30%, rgba(34, 190, 200, .18), transparent 40%),
+    linear-gradient(160deg, #061433 0%, #0b2257 45%, #0a2c48 80%, #071a33 100%);
+}
+
+.section::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(134, 236, 224, .4), rgba(241, 212, 154, .3), transparent);
+}
+
+/* ---------- Background ---------- */
+
+.bg {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.grid {
+  position: absolute;
+  inset: -56px;
+  background-image:
+    linear-gradient(rgba(150, 205, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(150, 205, 255, .05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 55%, #000 15%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 55%, #000 15%, transparent 80%);
+  animation: gridDrift 30s linear infinite;
+}
+
+.glowA,
+.glowB {
+  position: absolute;
+  border-radius: 50%;
+  animation: drift 22s ease-in-out infinite;
+}
+
+.glowA { top: 20%; left: 5%; width: 640px; height: 640px; background: radial-gradient(circle, rgba(111, 150, 255, .22), transparent 64%); }
+.glowB { right: -8%; bottom: -20%; width: 620px; height: 620px; background: radial-gradient(circle, rgba(134, 236, 224, .14), transparent 64%); animation-direction: reverse; }
+
+.ring {
+  position: absolute;
+  top: 62%;
+  left: 28%;
+  width: 760px;
+  aspect-ratio: 1;
+  margin: -380px 0 0 -380px;
+  border: 1px dashed rgba(150, 205, 255, .12);
+  border-radius: 50%;
+  animation: spin 80s linear infinite;
+}
+
+.ring + .ring { width: 520px; margin: -260px 0 0 -260px; border-style: solid; border-color: rgba(134, 236, 224, .1); animation-duration: 50s; animation-direction: reverse; }
+
+/* ---------- Heading ---------- */
+
+.head {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.head :global(.eyebrow) { justify-content: center; color: rgba(226, 240, 255, .86); }
+
+.head h2 {
+  color: #f5faff;
+  font-size: clamp(32px, 2.2vw + 18px, 54px);
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: .06em 0 .18em;
+  margin: -.06em 0 -.18em;
+  vertical-align: top;
+}
+
+.mask > span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform .9s cubic-bezier(.2, .8, .2, 1) var(--d);
+}
+
+.section[data-inview] .mask > span { transform: none; }
+
+.accent { display: block; }
+
+.accent .mask > span {
+  padding: 0 .04em .14em 0;
+  margin-bottom: -.14em;
+  color: transparent;
+  background: linear-gradient(110deg, #fff 0%, var(--teal) 35%, var(--blue) 70%, var(--gold) 100%);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.accent .mask:last-of-type > span { background-position: 100% 0; }
+
+.head p {
+  max-width: 520px;
+  margin: 18px auto 0;
+  color: rgba(206, 222, 242, .66);
+  font-size: 16px;
+  line-height: 1.65;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .7s ease .45s, transform .8s var(--ease-out) .45s;
+}
+
+.section[data-inview] .head p { opacity: 1; transform: none; }
+
+/* ---------- Cards ---------- */
+
+/* Three per row; a shorter last row stays centered. */
+.cards {
+  --gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+  margin-top: clamp(40px, 4vw, 56px);
+}
+
+/* Card treatment mirrors the homepage "What you receive" cards: light
+   surface, thin border, corner glow, top-edge light on hover. */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc((100% - var(--gap) * 2) / 3);
+  overflow: hidden;
+  padding: 14px 14px 26px;
+  border: 1px solid rgba(11, 22, 43, .1);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .97), rgba(247, 250, 254, .96));
+  box-shadow: 0 18px 45px rgba(22, 57, 104, .22), inset 0 1px rgba(255, 255, 255, .9);
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity .7s ease calc(150ms + var(--i) * 90ms),
+    transform .8s cubic-bezier(.2, .8, .2, 1) calc(150ms + var(--i) * 90ms),
+    box-shadow .32s ease,
+    border-color .32s ease;
+}
+
+/* soft corner glow (blue / gold alternating), behind the text area */
+.card::before {
+  position: absolute;
+  right: -90px;
+  bottom: -90px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  content: "";
+  background: radial-gradient(circle, rgba(47, 107, 255, .12), transparent 66%);
+  transition: transform .45s var(--ease-out);
+  pointer-events: none;
+}
+
+.card:nth-child(even)::before { background: radial-gradient(circle, rgba(201, 154, 74, .16), transparent 66%); }
+
+/* top edge light, drawn on hover */
+.card::after {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 22px;
+  left: 22px;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--color-gold), var(--color-blue), transparent);
+  transform: scaleX(0);
+  transition: transform .5s var(--ease-out);
+}
+
+.section[data-inview] .card { opacity: 1; transform: none; }
+
+.section[data-inview] .card:hover {
+  border-color: rgba(47, 107, 255, .28);
+  box-shadow: var(--shadow-glow), 0 26px 60px rgba(22, 57, 104, .28);
+  transform: translateY(-6px);
+  transition: opacity .7s ease, transform .32s var(--ease-out), box-shadow .32s ease, border-color .32s ease;
+}
+
+.card:hover::before { transform: scale(1.3) translate(-12px, -12px); }
+.card:hover::after { transform: scaleX(1); }
+
+.photo {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #eef3f9;
+}
+
+.photo img,
+.placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+
+.card:hover .photo img,
+.card:hover .placeholder { transform: scale(1.03); }
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  color: rgba(47, 107, 255, .35);
+  background: linear-gradient(160deg, #f2f6fc, #e2eaf6);
+}
+
+.placeholder svg { width: 34%; height: 34%; stroke-width: 1.2; }
+
+.num {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 0 10px;
+  color: var(--color-gold);
+  font: 700 12.5px var(--font-ui);
+  letter-spacing: .12em;
+}
+
+/* fine divider continuing from the number */
+.num::after {
+  flex: 1;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, rgba(47, 107, 255, .25), rgba(11, 22, 43, .06));
+}
+
+.card h3 {
+  position: relative;
+  margin-top: 12px;
+  padding: 0 10px;
+  color: var(--color-navy);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+
+.card p {
+  position: relative;
+  margin-top: 8px;
+  padding: 0 10px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-30px, 24px, 0) scale(1.06); } }
+@keyframes gridDrift { to { transform: translate3d(56px, 56px, 0); } }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+  .card { width: calc((100% - var(--gap)) / 2); }
+}
+
+@media (max-width: 640px) {
+  .cards { --gap: 18px; }
+  .card { width: 100%; }
+  .head p { font-size: 15px; }
+  .grid, .glowA, .glowB, .ring { animation: none; }
+}
+
+@media (hover: none) {
+  .section[data-inview] .card:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .head p, .mask > span { opacity: 1; transform: none; transition: none; }
+}

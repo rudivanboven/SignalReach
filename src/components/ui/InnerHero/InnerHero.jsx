@@ -45,6 +45,23 @@ function BgScene({ variant }) {
       </svg>
     );
   }
+  if (variant === "team") {
+    const pts = [[120, 150], [300, 90], [520, 200], [1180, 120], [1330, 300], [1240, 560], [180, 620], [980, 640]];
+    const edges = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 7], [0, 6]];
+    return (
+      <svg className={styles.scene} viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+        <circle className={styles.bgOrbit} cx="1060" cy="380" r="250" />
+        <circle className={styles.bgOrbit} cx="1060" cy="380" r="330" />
+        <circle className={styles.bgOrbitTrace} pathLength="1" cx="1060" cy="380" r="250" />
+        <circle className={styles.bgOrbitTrace} pathLength="1" cx="1060" cy="380" r="330" />
+        {edges.map(([a, b]) => <line key={`${a}-${b}`} className={styles.bgEdge} x1={pts[a][0]} y1={pts[a][1]} x2={pts[b][0]} y2={pts[b][1]} />)}
+        {[[240, 520], [420, 600], [700, 560], [860, 640], [1380, 460], [60, 400]].map(([x, y], i) => (
+          <circle key={`m-${x}`} className={styles.bgMote} cx={x} cy={y} r="2.5" style={{ animationDelay: `${i * -2}s` }} />
+        ))}
+        {pts.map(([x, y], i) => <circle key={`${x}-${y}`} className={styles.bgNode} cx={x} cy={y} r="3.5" style={{ animationDelay: `${i * -0.7}s` }} />)}
+      </svg>
+    );
+  }
   return (
     <>
       <span className={styles.scanBand} />
@@ -184,7 +201,42 @@ function ReportVisual() {
   );
 }
 
-const visuals = { process: ProcessVisual, services: ServicesVisual, about: AboutVisual, report: ReportVisual };
+// Team: four expertise placeholders (no real people) linked into one mesh
+// around a shared hub. Replace avatars with real photos when available.
+const members = [
+  { role: "QA", icon: "scan", at: [96, 92] },
+  { role: "Design", icon: "layout", at: [364, 112] },
+  { role: "Development", icon: "code", at: [346, 292], warm: true },
+  { role: "UX", icon: "cursor", at: [112, 282] },
+];
+const HUB = [230, 196];
+const loop = `M${members.map((m) => m.at.join(" ")).join(" L")} Z`;
+
+function TeamVisual() {
+  return (
+    <div className={styles.teamStage}>
+      <span className={styles.teamOrbit} />
+      <svg viewBox="0 0 460 380">
+        <path className={styles.mesh} d={loop} />
+        {members.map((m) => <path key={m.role} className={styles.spoke} d={`M${m.at[0]} ${m.at[1]} L${HUB[0]} ${HUB[1]}`} />)}
+        <path className={styles.meshRun} pathLength="1" d={loop} />
+        {members.map((m, i) => <path key={`p-${m.role}`} className={styles.spokeRun} style={{ "--i": i }} pathLength="1" d={`M${m.at[0]} ${m.at[1]} L${HUB[0]} ${HUB[1]}`} />)}
+      </svg>
+      <div className={styles.hub} style={{ left: `${(HUB[0] / 460) * 100}%`, top: `${(HUB[1] / 380) * 100}%` }}>
+        <span className={styles.hubPulse} />
+        <i><Icon name="sparkle" /></i>
+      </div>
+      {members.map((m, i) => (
+        <div key={m.role} className={`${styles.member} ${m.warm ? styles.memberWarm : ""}`} style={{ "--i": i, left: `${(m.at[0] / 460) * 100}%`, top: `${(m.at[1] / 380) * 100}%` }}>
+          <span className={styles.avatar}><Icon name="user" /><em><Icon name={m.icon} /></em></span>
+          <small>{m.role}</small>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const visuals = { team: TeamVisual, process: ProcessVisual, services: ServicesVisual, about: AboutVisual, report: ReportVisual };
 
 export default function InnerHero({
   variant = "process",

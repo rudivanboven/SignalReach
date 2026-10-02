@@ -36,6 +36,15 @@
   --line: rgba(241, 212, 154, .28);
 }
 
+.team {
+  --base: radial-gradient(circle at 70% 36%, rgba(60, 120, 255, .26), transparent 38%), radial-gradient(circle at 84% 76%, rgba(34, 190, 200, .16), transparent 36%), linear-gradient(135deg, #06122b 0%, #0c2350 46%, #0a2a44 70%, #081830 100%);
+  --glow-1: rgba(70, 120, 255, .36);
+  --glow-2: rgba(230, 184, 95, .18);
+  --accent: #86ece0;
+  --accent-2: #f1d49a;
+  --line: rgba(150, 200, 255, .26);
+}
+
 /* ---------- Shell ---------- */
 
 .hero {
@@ -713,6 +722,203 @@
 }
 
 .eta svg { width: 14px; height: 14px; }
+
+/* ---------- Team visual ---------- */
+
+.bgOrbit {
+  fill: none;
+  stroke: rgba(130, 180, 255, .1);
+  stroke-width: 1;
+}
+
+.bgOrbitTrace {
+  fill: none;
+  stroke: rgba(150, 225, 255, .7);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: .06 1;
+  filter: drop-shadow(0 0 6px rgba(110, 200, 255, .8));
+  animation: pathRun 14s linear infinite;
+}
+
+.bgOrbitTrace + .bgOrbitTrace {
+  stroke: rgba(241, 212, 154, .6);
+  animation-duration: 22s;
+  animation-direction: reverse;
+}
+
+.bgMote {
+  fill: var(--accent);
+  opacity: 0;
+  animation: moteRise 12s ease-in-out infinite;
+}
+
+.bgEdge {
+  stroke: rgba(150, 200, 255, .12);
+  stroke-width: 1;
+  stroke-dasharray: 3 8;
+  animation: dashFlow 16s linear infinite;
+}
+
+.teamStage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 460 / 380;
+}
+
+.teamStage > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.teamOrbit {
+  position: absolute;
+  top: calc(51.6% - 42%);
+  left: calc(50% - 35%);
+  width: 70%;
+  aspect-ratio: 1;
+  border: 1px dashed var(--line);
+  border-radius: 50%;
+  animation: spinPlain 50s linear infinite;
+}
+
+.teamOrbit::before {
+  position: absolute;
+  top: -4px;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  content: "";
+  border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow: 0 0 12px var(--accent-2);
+}
+
+.mesh { fill: none; stroke: var(--line); stroke-width: 1.4; }
+.spoke { fill: none; stroke: rgba(150, 200, 255, .18); stroke-width: 1.2; stroke-dasharray: 4 6; }
+
+.meshRun {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-dasharray: .1 1;
+  stroke-dashoffset: .1;
+  filter: drop-shadow(0 0 6px var(--accent));
+  animation: pathRun 8s linear infinite;
+}
+
+.spokeRun {
+  fill: none;
+  stroke: #7fa6ff;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: .25 1;
+  stroke-dashoffset: .25;
+  filter: drop-shadow(0 0 5px #7fa6ff);
+  animation: pathRun 4s ease-in-out calc(var(--i) * 1s) infinite;
+}
+
+.hub {
+  position: absolute;
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.hub i {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: #0a1a38;
+  border-radius: 20px;
+  background: linear-gradient(145deg, var(--accent-2), #d9a95a);
+  box-shadow: 0 0 0 8px rgba(241, 212, 154, .08), 0 0 40px rgba(241, 212, 154, .3), 0 20px 50px rgba(0, 6, 28, .45);
+  transform: rotate(45deg);
+}
+
+.hub i svg { width: 26px; height: 26px; transform: rotate(-45deg); }
+
+.hubPulse {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(241, 212, 154, .5);
+  border-radius: 20px;
+  transform: rotate(45deg);
+  animation: hubPulse 4s ease-out infinite;
+}
+
+.member {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  transform: translate(-50%, -38px);
+  animation: memberFloat calc(6s + var(--i) * .8s) ease-in-out infinite;
+}
+
+.avatar {
+  position: relative;
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  overflow: visible;
+  color: rgba(200, 225, 255, .55);
+  border: 1px solid rgba(150, 210, 255, .3);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, rgba(60, 100, 170, .9), rgba(10, 28, 60, .95) 72%);
+  box-shadow: 0 0 0 6px rgba(134, 236, 224, .05), 0 20px 50px rgba(0, 6, 28, .45);
+  animation: memberLit 4s ease-in-out calc(var(--i) * 1s) infinite;
+}
+
+.avatar > svg { width: 34px; height: 34px; }
+
+.avatar em {
+  position: absolute;
+  right: -4px;
+  bottom: -2px;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  color: #062030;
+  border: 2px solid #0b1f45;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.avatar em svg { width: 14px; height: 14px; stroke-width: 2.2; }
+.memberWarm .avatar em { background: var(--accent-2); color: #1a1406; }
+
+.member small {
+  padding: 6px 12px;
+  color: #eef6ff;
+  border: 1px solid rgba(160, 215, 255, .2);
+  border-radius: 99px;
+  background: rgba(10, 28, 64, .78);
+  box-shadow: 0 10px 26px rgba(0, 6, 28, .35);
+  font: 600 12px/1 var(--font-ui);
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+@keyframes spinPlain { to { rotate: 360deg; } }
+@keyframes moteRise { 0% { opacity: 0; transform: translateY(20px); } 30% { opacity: .7; } 100% { opacity: 0; transform: translateY(-90px); } }
+@keyframes memberFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@keyframes hubPulse { 0% { opacity: .8; scale: 1; } 100% { opacity: 0; scale: 1.9; } }
+@keyframes memberLit {
+  0%, 100% { border-color: rgba(150, 210, 255, .3); }
+  8%, 20% { border-color: rgba(134, 236, 224, .8); box-shadow: 0 0 0 6px rgba(134, 236, 224, .1), 0 0 30px rgba(134, 236, 224, .3), 0 20px 50px rgba(0, 6, 28, .45); }
+}
 
 /* ---------- Keyframes ---------- */
 
