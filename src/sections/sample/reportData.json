@@ -1,0 +1,373 @@
+{
+  "_note": "SAMPLE / DEMONSTRATION content. Northstar Creative Studio is a fictional business and every finding, count and value here is demo data. Used by the /sample-report page AND by scripts/sample-report/make-docx.mjs — edit here, then regenerate the screenshots/DOCX.",
+  "meta": {
+    "title": "Complete Website QA Report",
+    "website": "Northstar Creative Studio — Demo Website",
+    "url": "northstar-demo.example",
+    "reportType": "Full Website QA",
+    "status": "Sample Report",
+    "reviewedOn": "Desktop 1280px · Tablet 820px · Mobile 390px",
+    "preparedBy": "SignalReach",
+    "docx": "/reports/SignalReach-Sample-Website-QA-Report.docx"
+  },
+  "disclaimer": "This is a sample report created for demonstration purposes. Actual findings and report length vary depending on the website.",
+  "summary": {
+    "text": "This sample review demonstrates how SignalReach documents visual, usability, responsive and functional issues across a website. Each finding includes context, impact and a recommended next step.",
+    "overall": "The demo website has a strong visual direction, but the main call to action is easy to miss, several layouts break at tablet and mobile widths, and the contact form gives visitors no confirmation. Fixing the critical and high-priority items first will have the biggest effect on clarity and enquiries."
+  },
+  "severities": [
+    {
+      "id": "critical",
+      "label": "Critical",
+      "meaning": "Blocks a key task or loses enquiries — fix first."
+    },
+    {
+      "id": "high",
+      "label": "High",
+      "meaning": "Noticeably hurts clarity, trust or conversions."
+    },
+    {
+      "id": "medium",
+      "label": "Medium",
+      "meaning": "Visible quality issue worth scheduling soon."
+    },
+    {
+      "id": "low",
+      "label": "Low",
+      "meaning": "Polish item — improves consistency."
+    },
+    {
+      "id": "quickwin",
+      "label": "Quick Win",
+      "meaning": "Small effort, clear benefit."
+    }
+  ],
+  "categories": [
+    {
+      "title": "Design & Visual QA",
+      "items": [
+        "Typography",
+        "Spacing",
+        "Color consistency",
+        "Image presentation",
+        "Hierarchy"
+      ]
+    },
+    {
+      "title": "Responsive QA",
+      "items": [
+        "Desktop",
+        "Tablet",
+        "Mobile",
+        "Overflow",
+        "Wrapping",
+        "Spacing"
+      ]
+    },
+    {
+      "title": "UX & Usability",
+      "items": [
+        "Navigation",
+        "CTA clarity",
+        "Forms",
+        "User flow",
+        "Interaction feedback"
+      ]
+    },
+    {
+      "title": "Functional QA",
+      "items": [
+        "Buttons",
+        "Links",
+        "Forms",
+        "Dropdowns",
+        "Interactive elements"
+      ]
+    },
+    {
+      "title": "Content Presentation",
+      "items": [
+        "Headings",
+        "Readability",
+        "Messaging hierarchy",
+        "Calls to action"
+      ]
+    },
+    {
+      "title": "Conversion Review",
+      "items": [
+        "CTA placement",
+        "Clarity",
+        "Trust elements",
+        "User journey"
+      ]
+    },
+    {
+      "title": "Basic Performance & Technical",
+      "items": [
+        "Image weight",
+        "Obvious loading issues",
+        "Layout stability"
+      ]
+    },
+    {
+      "title": "Search / AI Readiness (supporting)",
+      "items": [
+        "Content structure",
+        "Heading hierarchy",
+        "Understandable page content"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "homepage",
+      "title": "Homepage — Design & Visual QA",
+      "short": "Homepage",
+      "intro": "First impressions: hero, branding and the primary call to action at desktop width."
+    },
+    {
+      "id": "responsive",
+      "title": "Responsive QA",
+      "short": "Responsive QA",
+      "intro": "How layouts, navigation and media behave across tablet and mobile widths."
+    },
+    {
+      "id": "ux",
+      "title": "UX, Usability & Conversion",
+      "short": "UX & Usability",
+      "intro": "How easily visitors can understand the page and reach the next step."
+    },
+    {
+      "id": "functionality",
+      "title": "Functional QA",
+      "short": "Functionality",
+      "intro": "Forms, buttons and interactive elements — does each one respond clearly?"
+    },
+    {
+      "id": "content",
+      "title": "Content Presentation",
+      "short": "Content",
+      "intro": "Headings, readability and messaging hierarchy."
+    },
+    {
+      "id": "performance",
+      "title": "Basic Performance & Technical",
+      "short": "Performance",
+      "intro": "Obvious loading and media-weight observations (not a full technical audit)."
+    }
+  ],
+  "findings": [
+    {
+      "id": "01",
+      "section": "homepage",
+      "category": "Hero / CTA",
+      "page": "Homepage",
+      "area": "Hero",
+      "severity": "high",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-01.jpg",
+      "shape": "wide",
+      "title": "Primary call-to-action lacks visual emphasis.",
+      "found": "The “Start a project” button uses a pale fill that blends into the hero background and looks almost identical to the secondary “View our work” link beside it.",
+      "why": "Visitors may not immediately see the main action the page wants them to take, which reduces enquiries from the most visited page.",
+      "fix": "Give the primary CTA a solid, high-contrast fill, add more space around it and style “View our work” clearly as a secondary text link.",
+      "w": 1920,
+      "h": 960
+    },
+    {
+      "id": "02",
+      "section": "homepage",
+      "category": "Logo / Branding",
+      "page": "Homepage",
+      "area": "Header",
+      "severity": "medium",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-02.jpg",
+      "shape": "wide",
+      "title": "Logo loses contrast against the hero background.",
+      "found": "The dark logo sits on top of the darkest part of the hero gradient, so the wordmark is hard to read at a glance.",
+      "why": "The brand is the first thing visitors use to orient themselves; a faint logo makes the site feel less polished and less trustworthy.",
+      "fix": "Use a light version of the logo over the hero (or add a subtle header background) so it keeps at least 4.5:1 contrast.",
+      "w": 1920,
+      "h": 450
+    },
+    {
+      "id": "03",
+      "section": "responsive",
+      "category": "Navigation",
+      "page": "All pages",
+      "area": "Header navigation",
+      "severity": "medium",
+      "device": "Tablet · 820px",
+      "image": "/reports/screens/finding-03.jpg",
+      "shape": "wide",
+      "title": "Navigation becomes cramped at tablet widths.",
+      "found": "Between roughly 780px and 1000px the six menu links and the header button squeeze together, and two items wrap onto a second line under the logo.",
+      "why": "Cramped, wrapping navigation is hard to tap accurately and makes the header look broken on common tablet sizes.",
+      "fix": "Switch to the mobile menu earlier (around 1000px) or reduce the number of top-level links and tighten their spacing rules.",
+      "w": 1230,
+      "h": 390
+    },
+    {
+      "id": "04",
+      "section": "responsive",
+      "category": "Mobile Responsiveness",
+      "page": "Homepage",
+      "area": "Hero heading",
+      "severity": "high",
+      "device": "Mobile · 390px",
+      "image": "/reports/screens/finding-04.jpg",
+      "shape": "tall",
+      "title": "Hero heading wraps awkwardly on smaller screens.",
+      "found": "The hero heading keeps its desktop size on mobile, so “Brand-ready” splits across lines and the heading pushes the CTA below the first screen.",
+      "why": "The key message becomes harder to read and visitors must scroll before they see any action to take.",
+      "fix": "Scale the heading down fluidly on small screens (for example with clamp()), prevent the hyphenated word from breaking and keep the CTA visible in the first view.",
+      "w": 585,
+      "h": 1068
+    },
+    {
+      "id": "05",
+      "section": "responsive",
+      "category": "Image / Media",
+      "page": "Homepage",
+      "area": "Hero image",
+      "severity": "medium",
+      "device": "Mobile · 390px",
+      "image": "/reports/screens/finding-05.jpg",
+      "shape": "tall",
+      "title": "Important subject matter is cropped on mobile.",
+      "found": "On narrow screens the hero artwork is cropped from the left edge, cutting off the featured product so only empty background remains.",
+      "why": "The image no longer communicates what the studio does, so the hero loses its visual message on the devices most visitors use.",
+      "fix": "Set the image focal point (object-position) to keep the subject in frame, or provide a mobile-specific crop of the artwork.",
+      "w": 585,
+      "h": 750
+    },
+    {
+      "id": "06",
+      "section": "responsive",
+      "category": "Responsive Layout",
+      "page": "Services",
+      "area": "Service cards",
+      "severity": "low",
+      "device": "Tablet · 900px",
+      "image": "/reports/screens/finding-06.jpg",
+      "shape": "wide",
+      "title": "Cards become uneven at intermediate widths.",
+      "found": "At around 900px the service cards have different heights and the third card drops onto its own row, leaving an unbalanced gap.",
+      "why": "Uneven cards make the section look unfinished and make the services harder to compare side by side.",
+      "fix": "Use equal-height cards (stretch alignment) and a two-column layout at this width so the cards wrap in balanced rows.",
+      "w": 1350,
+      "h": 922
+    },
+    {
+      "id": "07",
+      "section": "ux",
+      "category": "Conversion Flow",
+      "page": "Homepage",
+      "area": "Full page",
+      "severity": "high",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-07.jpg",
+      "shape": "page",
+      "title": "Important CTA appears too late in the page journey.",
+      "found": "After the hero, the next clear invitation to get in touch only appears in the footer area, after five full sections of content.",
+      "why": "Visitors who are convinced halfway down the page have no obvious next step, so interested visitors may leave without enquiring.",
+      "fix": "Repeat a clear “Start a project” CTA after the services and case-study sections, and add a short contact prompt before the footer.",
+      "w": 1520,
+      "h": 4421
+    },
+    {
+      "id": "08",
+      "section": "ux",
+      "category": "Accessibility / Usability",
+      "page": "Homepage",
+      "area": "Testimonials",
+      "severity": "medium",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-08.jpg",
+      "shape": "wide",
+      "title": "Some text/background combinations have weak contrast.",
+      "found": "Testimonial quotes and client names use very light grey text on a white background, making them difficult to read.",
+      "why": "Low-contrast text is harder for everyone to read — especially on mobile, in bright light or for visitors with low vision — and weakens a key trust section.",
+      "fix": "Darken the testimonial text to meet WCAG AA contrast (4.5:1 for body text) and give client names a stronger weight.",
+      "w": 1920,
+      "h": 546
+    },
+    {
+      "id": "09",
+      "section": "functionality",
+      "category": "Form UX",
+      "page": "Contact",
+      "area": "Contact form",
+      "severity": "critical",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-09.jpg",
+      "shape": "wide",
+      "title": "Form submission gives no confirmation.",
+      "found": "After the contact form is filled in and “Send message” is pressed, nothing visibly changes — no success message, no loading state and the fields stay filled.",
+      "why": "Visitors can’t tell if their enquiry was sent, so they may submit repeatedly or leave assuming it failed — directly risking lost leads.",
+      "fix": "Show a clear success message (and clear the fields) after a successful submit, show a loading state on the button and display a helpful error if sending fails.",
+      "w": 1920,
+      "h": 775
+    },
+    {
+      "id": "10",
+      "section": "functionality",
+      "category": "Functionality",
+      "page": "Services",
+      "area": "FAQ accordion",
+      "severity": "medium",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-10.jpg",
+      "shape": "wide",
+      "title": "Interactive control lacks feedback after activation.",
+      "found": "FAQ items open when clicked, but there is no change to the icon, colour or state — open and closed items look identical.",
+      "why": "Without feedback, visitors aren’t sure whether their click worked or which answer belongs to which question.",
+      "fix": "Rotate or swap the icon when an item is open, highlight the open item and set aria-expanded so the state is also announced to assistive technology.",
+      "w": 1920,
+      "h": 513
+    },
+    {
+      "id": "11",
+      "section": "content",
+      "category": "Content Hierarchy",
+      "page": "About",
+      "area": "Studio story",
+      "severity": "low",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-11.jpg",
+      "shape": "wide",
+      "title": "Heading and supporting copy don’t communicate priority.",
+      "found": "The section label, heading and body copy are almost the same size and weight, so there is no clear entry point into the content.",
+      "why": "Visitors scan before they read; without a clear hierarchy the section’s main message is easy to skip. A clear heading structure also helps search engines and AI tools understand the page.",
+      "fix": "Make the section heading clearly larger and bolder, keep the label small and use one main heading level per section.",
+      "w": 1920,
+      "h": 750
+    },
+    {
+      "id": "12",
+      "section": "performance",
+      "category": "Performance / Technical",
+      "page": "Homepage",
+      "area": "Gallery",
+      "severity": "quickwin",
+      "device": "Desktop",
+      "image": "/reports/screens/finding-12.jpg",
+      "shape": "wide",
+      "title": "Large media can be optimized to improve loading.",
+      "found": "The gallery uses very large, uncompressed images that are scaled down in the browser (demo value: 4.8 MB for the first image).",
+      "why": "Heavy images slow down the first view, especially on mobile connections, and can cause visible layout shifts while loading.",
+      "fix": "Export images at the size they’re displayed, use a modern format such as WebP, add width/height attributes and lazy-load images below the fold.",
+      "w": 1920,
+      "h": 705
+    }
+  ],
+  "nextSteps": [
+    "Fix the critical form confirmation issue first so no enquiries are lost.",
+    "Address the high-priority CTA and mobile hero issues to improve first impressions and conversions.",
+    "Schedule the medium-priority responsive and contrast fixes in the next design/development pass.",
+    "Batch the low-priority and quick-win items into a polish sprint.",
+    "Re-test the key pages on desktop, tablet and mobile after changes are made."
+  ]
+}

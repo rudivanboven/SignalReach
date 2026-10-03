@@ -1,0 +1,21 @@
+/* Tasteful priority chips — tinted fill, darker text, small dot. */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px 4px 9px;
+  border-radius: 99px;
+  font: 700 11.5px/1.4 var(--font-ui);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chip i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+.chip[data-level="critical"] { color: #b42318; background: #fde8e7; }
+.chip[data-level="high"] { color: #c4320a; background: #fff1eb; }
+.chip[data-level="medium"] { color: #8a6424; background: #fbf1df; }
+.chip[data-level="low"] { color: #475467; background: #eef2f6; }
+.chip[data-level="quickwin"] { color: #067647; background: #e3f6ec; }

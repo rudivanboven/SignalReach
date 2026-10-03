@@ -45,6 +45,15 @@
   --line: rgba(150, 200, 255, .26);
 }
 
+.sample {
+  --base: radial-gradient(circle at 74% 34%, rgba(47, 120, 255, .28), transparent 38%), radial-gradient(circle at 18% 86%, rgba(201, 154, 74, .12), transparent 34%), linear-gradient(135deg, #050f27 0%, #0b2052 50%, #082039 100%);
+  --glow-1: rgba(60, 130, 255, .38);
+  --glow-2: rgba(36, 200, 235, .2);
+  --accent: #86ece0;
+  --accent-2: #f1d49a;
+  --line: rgba(140, 210, 255, .28);
+}
+
 /* ---------- Shell ---------- */
 
 .hero {
@@ -904,6 +913,155 @@
   0%, 100% { border-color: rgba(150, 210, 255, .3); }
   8%, 20% { border-color: rgba(134, 236, 224, .8); box-shadow: 0 0 0 6px rgba(134, 236, 224, .1), 0 0 30px rgba(134, 236, 224, .3), 0 20px 50px rgba(0, 6, 28, .45); }
 }
+
+/* ---------- Sample report visual ---------- */
+
+.bgDoc { fill: rgba(140, 200, 255, .03); stroke: rgba(140, 210, 255, .16); stroke-width: 1.2; animation: docDrift 14s ease-in-out infinite; }
+.bgDoc path { fill: none; stroke: rgba(140, 210, 255, .2); stroke-linecap: round; }
+.bgPin { fill: var(--accent-2); opacity: 0; animation: pinPop 6s ease-in-out infinite; }
+
+.docStage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 460 / 400;
+}
+
+.docPage {
+  position: absolute;
+  top: 6%;
+  left: 14%;
+  width: 66%;
+  height: 88%;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.docBack2 { background: rgba(225, 235, 255, .16); border: 1px solid rgba(180, 220, 255, .2); transform: translate(16%, -2%) rotate(7deg); animation: backDrift 9s ease-in-out infinite; }
+.docBack1 { background: rgba(240, 246, 255, .5); transform: translate(8%, 1%) rotate(3.5deg); animation: backDrift 9s ease-in-out -3s infinite reverse; }
+
+.docFront {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 14px 16px;
+  box-shadow: 0 40px 90px rgba(0, 6, 28, .55), 0 0 0 1px rgba(255, 255, 255, .6);
+  animation: frontFloat 8s ease-in-out infinite;
+}
+
+.docHead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-line);
+  font: 600 10px var(--font-ui);
+}
+
+.docHead strong { color: var(--color-navy); font-size: 11px; }
+.docHead span { color: var(--color-muted); }
+.docHead em { margin-left: auto; padding: 2px 7px; color: #0b1d44; border-radius: 99px; background: rgba(241, 212, 154, .55); font-style: normal; }
+
+.docLabel { color: #a77a32; font: 700 9px var(--font-ui); letter-spacing: .12em; text-transform: uppercase; }
+
+.docShot {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  height: 34%;
+  padding: 9px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: linear-gradient(105deg, #0d1120, #2b2f4f 60%, #c98e6a);
+}
+
+.docShot b { display: block; border-radius: 3px; }
+.docShotNav { display: flex !important; justify-content: flex-end; gap: 5px; }
+.docShotNav i { width: 16px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .45); }
+.docShotTitle { width: 62%; height: 9px; background: rgba(255, 255, 255, .9); }
+.docShotLine { width: 44%; height: 6px; background: rgba(255, 255, 255, .45); }
+
+.docMarker {
+  position: absolute;
+  bottom: 12%;
+  left: 8%;
+  width: 30%;
+  height: 22%;
+  border: 2px solid #ff6b62;
+  border-radius: 6px;
+  animation: markerPulse 2.4s ease-in-out infinite;
+}
+
+.docMarker i {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  display: grid;
+  width: 15px;
+  height: 15px;
+  place-items: center;
+  color: #fff;
+  border-radius: 50%;
+  background: #e5534b;
+  font: 700 9px var(--font-ui);
+  font-style: normal;
+}
+
+.docScan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(transparent, rgba(134, 236, 224, .35), transparent);
+  animation: docScanMove 3.6s ease-in-out infinite;
+}
+
+.docTitle { display: grid; gap: 5px; }
+.docTitle b, .docLines b, .docFix b { display: block; height: 6px; border-radius: 3px; background: #dbe3ef; }
+.docTitle b:first-child { width: 88%; height: 8px; background: var(--color-navy); }
+.docTitle b:last-child { width: 56%; }
+
+.docRow { display: flex; align-items: center; gap: 10px; }
+.docSev { flex: none; padding: 3px 9px; color: #c4320a; border-radius: 99px; background: #fff1eb; font: 700 9.5px var(--font-ui); font-style: normal; letter-spacing: .06em; text-transform: uppercase; }
+.docLines { display: grid; flex: 1; gap: 5px; }
+.docLines b:last-child { width: 70%; }
+
+.docFix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: linear-gradient(120deg, rgba(46, 182, 125, .12), rgba(36, 183, 216, .1));
+}
+
+.docFix > svg { flex: none; width: 15px; height: 15px; color: #17865a; stroke-width: 2.4; }
+.docFix span { display: grid; flex: 1; gap: 4px; }
+.docFix small { color: #17865a; font: 700 8.5px var(--font-ui); letter-spacing: .08em; text-transform: uppercase; }
+.docFix b { width: 80%; background: rgba(23, 134, 90, .22); }
+
+.docChip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  color: #eef8ff;
+  font: 600 12px var(--font-ui);
+  white-space: nowrap;
+  animation: floatY 7s ease-in-out infinite;
+}
+
+.docChip { top: 30%; left: -2%; }
+.docChip2 { top: auto; right: -2%; bottom: 10%; left: auto; animation-delay: -3.5s; }
+
+@keyframes docDrift { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+@keyframes pinPop { 0%, 60%, 100% { opacity: 0; } 70%, 85% { opacity: .8; } }
+@keyframes backDrift { 0%, 100% { translate: 0 0; } 50% { translate: 6px -8px; } }
+@keyframes frontFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@keyframes docScanMove { from { transform: translateY(-100%); } to { transform: translateY(340%); } }
+@keyframes markerPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(229, 83, 75, .45); } 50% { box-shadow: 0 0 0 5px rgba(229, 83, 75, 0); } }
 
 /* ---------- Keyframes ---------- */
 

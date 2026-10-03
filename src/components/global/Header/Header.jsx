@@ -12,10 +12,11 @@ const links = [
   ["/services", "Services"],
   ["/team", "Team"],
   ["/how-it-works", "How It Works"],
+  ["/sample-report", "Sample QA Report"],
 ];
 
 // Routes whose hero is dark, so the header starts transparent over it.
-const overlayRoutes = ["/", "/how-it-works", "/services", "/about", "/team", "/free-report"];
+const overlayRoutes = ["/", "/how-it-works", "/services", "/about", "/team", "/free-report", "/sample-report"];
 
 export default function Header() {
   const pathname = usePathname();

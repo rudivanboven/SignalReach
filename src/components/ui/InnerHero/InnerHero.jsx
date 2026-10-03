@@ -58,6 +58,21 @@ function BgScene({ variant }) {
       </svg>
     );
   }
+  if (variant === "sample") {
+    return (
+      <svg className={styles.scene} viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
+        {[[80, 120, -8], [210, 470, 6], [1290, 90, 9], [1330, 470, -5], [640, 600, 4]].map(([x, y, r], i) => (
+          <g key={`${x}-${y}`} className={styles.bgDoc} style={{ animationDelay: `${i * -2.2}s` }} transform={`rotate(${r} ${x + 40} ${y + 52})`}>
+            <rect x={x} y={y} width="80" height="104" rx="8" />
+            <path d={`M${x + 14} ${y + 24} h40 M${x + 14} ${y + 40} h52 M${x + 14} ${y + 56} h30`} />
+          </g>
+        ))}
+        {[[360, 210], [1120, 300], [980, 620], [470, 420]].map(([x, y], i) => (
+          <circle key={`p-${x}`} className={styles.bgPin} cx={x} cy={y} r="5" style={{ animationDelay: `${i * -1.3}s` }} />
+        ))}
+      </svg>
+    );
+  }
   return (
     <>
       <span className={styles.scanBand} />
@@ -232,7 +247,44 @@ function TeamVisual() {
   );
 }
 
-const visuals = { team: TeamVisual, process: ProcessVisual, services: ServicesVisual, about: AboutVisual, report: ReportVisual };
+// Sample report: a stacked QA document — page counter, annotated screenshot,
+// severity label and recommendation — with pages drifting behind it.
+function SampleVisual() {
+  return (
+    <div className={styles.docStage}>
+      <span className={`${styles.docPage} ${styles.docBack2}`} />
+      <span className={`${styles.docPage} ${styles.docBack1}`} />
+      <div className={`${styles.docPage} ${styles.docFront}`}>
+        <div className={styles.docHead}>
+          <strong>SignalReach</strong>
+          <span>QA Report</span>
+          <em>Page 04 / 23</em>
+        </div>
+        <small className={styles.docLabel}>Finding 01 · Homepage · Hero</small>
+        <div className={styles.docShot}>
+          <b className={styles.docShotNav}><i /><i /><i /></b>
+          <b className={styles.docShotTitle} />
+          <b className={styles.docShotLine} />
+          <span className={styles.docMarker}><i>1</i></span>
+          <span className={styles.docScan} />
+        </div>
+        <div className={styles.docTitle}><b /><b /></div>
+        <div className={styles.docRow}>
+          <em className={styles.docSev}>High</em>
+          <span className={styles.docLines}><b /><b /></span>
+        </div>
+        <div className={styles.docFix}>
+          <Icon name="check" />
+          <span><small>Recommendation</small><b /></span>
+        </div>
+      </div>
+      <div className={`${styles.panel} ${styles.docChip}`}><Icon name="image" />Screenshot + marker</div>
+      <div className={`${styles.panel} ${styles.docChip} ${styles.docChip2}`}><Icon name="alert" />Severity &amp; impact</div>
+    </div>
+  );
+}
+
+const visuals = { sample: SampleVisual, team: TeamVisual, process: ProcessVisual, services: ServicesVisual, about: AboutVisual, report: ReportVisual };
 
 export default function InnerHero({
   variant = "process",
