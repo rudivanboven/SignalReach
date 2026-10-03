@@ -1,5 +1,6 @@
-/* "The people behind every review" — simple white profile cards (photo,
-   name, bio), three per row, on the dark section background. */
+/* "The people behind every review" — Leadership Team: three premium white
+   cards (photo, number, name, role badge, short bio, Read More) on the dark
+   section background. The Specialists group follows in its own light section. */
 
 .section {
   --teal: #86ece0;
@@ -13,16 +14,6 @@
     radial-gradient(circle at 25% 55%, rgba(60, 110, 255, .26), transparent 42%),
     radial-gradient(circle at 85% 30%, rgba(34, 190, 200, .18), transparent 40%),
     linear-gradient(160deg, #061433 0%, #0b2257 45%, #0a2c48 80%, #071a33 100%);
-}
-
-.section::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  content: "";
-  background: linear-gradient(90deg, transparent, rgba(134, 236, 224, .4), rgba(241, 212, 154, .3), transparent);
 }
 
 /* ---------- Background ---------- */
@@ -131,55 +122,97 @@
 
 .section[data-inview] .head p { opacity: 1; transform: none; }
 
-/* ---------- Cards ---------- */
+/* ---------- Group heading ---------- */
+
+.groupHead {
+  margin-top: clamp(44px, 4vw, 60px);
+  text-align: center;
+}
+
+.groupLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--gold);
+  font: 800 clamp(17px, .5vw + 14px, 22px) var(--font-ui);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-shadow: 0 0 28px rgba(241, 212, 154, .25);
+}
+
+.groupLabel::before,
+.groupLabel::after {
+  width: clamp(32px, 4vw, 64px);
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--teal));
+}
+
+.groupLabel::after { transform: scaleX(-1); }
+
+.groupHead p {
+  max-width: 760px;
+  margin: 14px auto 0;
+  color: rgba(206, 222, 242, .68);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ---------- Leadership cards ---------- */
 
 /* Three per row; a shorter last row stays centered. */
 .cards {
-  --gap: 24px;
+  --gap: 28px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--gap);
-  margin-top: clamp(40px, 4vw, 56px);
+  margin-top: clamp(28px, 3vw, 40px);
 }
 
-/* Card treatment mirrors the homepage "What you receive" cards: light
-   surface, thin border, corner glow, top-edge light on hover. */
 .card {
+  --a-rgb: 127, 216, 255;
   position: relative;
   display: flex;
   flex-direction: column;
   width: calc((100% - var(--gap) * 2) / 3);
   overflow: hidden;
   padding: 14px 14px 26px;
-  border: 1px solid rgba(11, 22, 43, .1);
-  border-radius: 22px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .97), rgba(247, 250, 254, .96));
-  box-shadow: 0 18px 45px rgba(22, 57, 104, .22), inset 0 1px rgba(255, 255, 255, .9);
+  border: 1px solid transparent;
+  border-radius: 24px;
+  /* white surface + gradient border (moves on hover) */
+  background:
+    linear-gradient(180deg, #fff, #f5f8fd) padding-box,
+    linear-gradient(135deg, rgba(var(--a-rgb), .95), rgba(47, 107, 255, .3) 35%, rgba(255, 255, 255, .5) 55%, rgba(var(--a-rgb), .8)) border-box;
+  background-size: 100% 100%, 220% 220%;
+  background-position: 0 0, 0% 0%;
+  box-shadow: 0 28px 64px rgba(2, 10, 32, .42), 0 0 0 6px rgba(var(--a-rgb), .04);
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(32px);
   transition:
-    opacity .7s ease calc(150ms + var(--i) * 90ms),
-    transform .8s cubic-bezier(.2, .8, .2, 1) calc(150ms + var(--i) * 90ms),
-    box-shadow .32s ease,
-    border-color .32s ease;
+    opacity .7s ease calc(150ms + var(--i) * 110ms),
+    transform .8s cubic-bezier(.2, .8, .2, 1) calc(150ms + var(--i) * 110ms),
+    box-shadow .35s ease,
+    background-position .9s ease;
 }
 
-/* soft corner glow (blue / gold alternating), behind the text area */
+.card[data-accent="gold"] { --a-rgb: 214, 170, 92; }
+.card[data-accent="cyan"] { --a-rgb: 64, 190, 240; }
+.card[data-accent="teal"] { --a-rgb: 56, 200, 180; }
+
+/* soft corner glow in the member's accent, behind the text area */
 .card::before {
   position: absolute;
   right: -90px;
   bottom: -90px;
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   content: "";
-  background: radial-gradient(circle, rgba(47, 107, 255, .12), transparent 66%);
+  background: radial-gradient(circle, rgba(var(--a-rgb), .16), transparent 66%);
   transition: transform .45s var(--ease-out);
   pointer-events: none;
 }
-
-.card:nth-child(even)::before { background: radial-gradient(circle, rgba(201, 154, 74, .16), transparent 66%); }
 
 /* top edge light, drawn on hover */
 .card::after {
@@ -190,41 +223,64 @@
   left: 22px;
   height: 2px;
   content: "";
-  background: linear-gradient(90deg, transparent, var(--color-gold), var(--color-blue), transparent);
+  background: linear-gradient(90deg, transparent, rgb(var(--a-rgb)), var(--color-blue), transparent);
   transform: scaleX(0);
   transition: transform .5s var(--ease-out);
 }
 
+/* accent light that travels across the top edge once on reveal */
+.trace {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(var(--a-rgb)), transparent) no-repeat;
+  background-size: 40% 100%;
+  background-position: -70% 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .section[data-inview] .card { opacity: 1; transform: none; }
+.section[data-inview] .trace { animation: traceRun 1.6s ease-in-out calc(.9s + var(--i) * 160ms) 1 both; }
 
 .section[data-inview] .card:hover {
-  border-color: rgba(47, 107, 255, .28);
-  box-shadow: var(--shadow-glow), 0 26px 60px rgba(22, 57, 104, .28);
+  --badge-lift: 1.14;
+  background-position: 0 0, 100% 100%;
+  box-shadow: 0 34px 76px rgba(2, 10, 32, .5), 0 0 0 6px rgba(var(--a-rgb), .1), 0 0 44px rgba(var(--a-rgb), .2);
   transform: translateY(-6px);
-  transition: opacity .7s ease, transform .32s var(--ease-out), box-shadow .32s ease, border-color .32s ease;
+  transition: opacity .7s ease, transform .32s var(--ease-out), box-shadow .32s ease, background-position .9s ease;
 }
 
 .card:hover::before { transform: scale(1.3) translate(-12px, -12px); }
 .card:hover::after { transform: scaleX(1); }
 
 .photo {
-  aspect-ratio: 1;
+  --photo-h: 425px;
+  height: var(--photo-h);
   overflow: hidden;
   border-radius: 16px;
-  background: #eef3f9;
+  background: #e8eef7;
+  clip-path: inset(10% 8% 10% 8% round 16px);
+  transition: clip-path 1.1s cubic-bezier(.2, .8, .2, 1) calc(250ms + var(--i) * 110ms);
 }
+
+.section[data-inview] .photo { clip-path: inset(0 round 16px); }
 
 .photo img,
 .placeholder {
   display: block;
   width: 100%;
-  height: 100%;
+  height: var(--photo-h);
   object-fit: cover;
+  object-position: center;
   transition: transform .6s ease;
 }
 
 .card:hover .photo img,
-.card:hover .placeholder { transform: scale(1.03); }
+.card:hover .placeholder { transform: scale(1.04); }
 
 .placeholder {
   display: grid;
@@ -241,9 +297,10 @@
   gap: 12px;
   margin-top: 20px;
   padding: 0 10px;
-  color: var(--color-gold);
+  color: rgb(var(--a-rgb));
   font: 700 12.5px var(--font-ui);
-  letter-spacing: .12em;
+  letter-spacing: .14em;
+  filter: saturate(1.2) brightness(.85);
 }
 
 /* fine divider continuing from the number */
@@ -251,29 +308,120 @@
   flex: 1;
   height: 1px;
   content: "";
-  background: linear-gradient(90deg, rgba(47, 107, 255, .25), rgba(11, 22, 43, .06));
+  background: linear-gradient(90deg, rgba(var(--a-rgb), .45), rgba(11, 22, 43, .06));
 }
 
 .card h3 {
   position: relative;
-  margin-top: 12px;
+  margin-top: 14px;
   padding: 0 10px;
   color: var(--color-navy);
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -.01em;
+  font-size: clamp(22px, .5vw + 18px, 26px);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -.02em;
 }
+
+.badge { margin: 12px 10px 0; }
 
 .card p {
   position: relative;
-  margin-top: 8px;
+  margin-top: 16px;
   padding: 0 10px;
   color: var(--color-muted);
   font-size: 15px;
   line-height: 1.65;
 }
 
+/* "Read More" — its ::before stretches over the card so the whole card is clickable */
+.more {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding: 18px 10px 0;
+  color: var(--color-blue);
+  font: 600 var(--link-size) var(--font-ui);
+  transition: color .25s ease;
+}
+
+.more::before {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+}
+
+.more svg { width: 16px; height: 16px; transition: transform .3s var(--ease-out); }
+.card:hover .more { color: var(--color-navy); }
+.card:hover .more svg { transform: translateX(4px); }
+.more:focus-visible { outline: none; }
+.card:has(.more:focus-visible) { outline: 2px solid var(--color-blue); outline-offset: 3px; }
+
+/* ---------- Divider into Specialists ---------- */
+
+.divider {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent, rgba(134, 236, 224, .4), rgba(241, 212, 154, .3), transparent);
+}
+
+.divider span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  animation: dividerRun 7s ease-in-out infinite;
+}
+
+/* ---------- Signal lines + light points ---------- */
+
+.signals {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.signalPath { fill: none; stroke: rgba(150, 205, 255, .07); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+.signalRun {
+  fill: none;
+  stroke: rgba(134, 236, 224, .45);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: .08 1;
+  vector-effect: non-scaling-stroke;
+  animation: pathRun 18s linear infinite;
+}
+
+.signalRunSlow { stroke: rgba(241, 212, 154, .35); animation-duration: 26s; animation-direction: reverse; }
+
+.point {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 10px var(--teal);
+  opacity: .4;
+  animation: pointFloat 14s ease-in-out infinite;
+}
+
+.point:nth-of-type(even) { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+
+@keyframes traceRun { 0% { background-position: -70% 0; opacity: 0; } 12%, 85% { opacity: 1; } 100% { background-position: 170% 0; opacity: 0; } }
+@keyframes dividerRun { 0% { transform: translateX(-100%); } 60%, 100% { transform: translateX(600%); } }
+@keyframes pathRun { to { stroke-dashoffset: -1; } }
+@keyframes pointFloat { 0%, 100% { transform: translateY(0); opacity: .25; } 50% { transform: translateY(-22px); opacity: .7; } }
 @keyframes spin { to { rotate: 360deg; } }
 @keyframes drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-30px, 24px, 0) scale(1.06); } }
 @keyframes gridDrift { to { transform: translate3d(56px, 56px, 0); } }
@@ -282,13 +430,19 @@
 
 @media (max-width: 1024px) {
   .card { width: calc((100% - var(--gap)) / 2); }
+  .photo { --photo-h: 380px; }
 }
 
 @media (max-width: 640px) {
   .cards { --gap: 18px; }
   .card { width: 100%; }
+  .photo { --photo-h: 340px; }
   .head p { font-size: 15px; }
-  .grid, .glowA, .glowB, .ring { animation: none; }
+  .grid, .glowA, .glowB, .ring, .signalRun, .point { animation: none; }
+}
+
+@media (max-width: 400px) {
+  .photo { --photo-h: 300px; }
 }
 
 @media (hover: none) {
@@ -297,4 +451,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .card, .head p, .mask > span { opacity: 1; transform: none; transition: none; }
+  .photo { clip-path: none; transition: none; }
+  .trace, .divider span, .signalRun, .point { animation: none; }
 }

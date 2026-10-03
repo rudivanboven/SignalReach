@@ -50,10 +50,6 @@ function BgScene({ variant }) {
     const edges = [[0, 1], [1, 2], [3, 4], [4, 5], [5, 7], [0, 6]];
     return (
       <svg className={styles.scene} viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice">
-        <circle className={styles.bgOrbit} cx="1060" cy="380" r="250" />
-        <circle className={styles.bgOrbit} cx="1060" cy="380" r="330" />
-        <circle className={styles.bgOrbitTrace} pathLength="1" cx="1060" cy="380" r="250" />
-        <circle className={styles.bgOrbitTrace} pathLength="1" cx="1060" cy="380" r="330" />
         {edges.map(([a, b]) => <line key={`${a}-${b}`} className={styles.bgEdge} x1={pts[a][0]} y1={pts[a][1]} x2={pts[b][0]} y2={pts[b][1]} />)}
         {[[240, 520], [420, 600], [700, 560], [860, 640], [1380, 460], [60, 400]].map(([x, y], i) => (
           <circle key={`m-${x}`} className={styles.bgMote} cx={x} cy={y} r="2.5" style={{ animationDelay: `${i * -2}s` }} />

@@ -78,10 +78,6 @@ export default function Footer() {
         <span>© 2026 SignalReach. All rights reserved.</span>
         <span className={styles.credit}>
           Website designed &amp; developed by <strong>Ayush Thakur</strong>
-          <span className={styles.creditTail}>
-            <i aria-hidden="true">·</i>
-            <a className={styles.creditPhone} href="tel:+918219743301">+91 821-974-3301</a>
-          </span>
         </span>
       </div>
     </footer>

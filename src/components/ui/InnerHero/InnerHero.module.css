@@ -725,28 +725,6 @@
 
 /* ---------- Team visual ---------- */
 
-.bgOrbit {
-  fill: none;
-  stroke: rgba(130, 180, 255, .1);
-  stroke-width: 1;
-}
-
-.bgOrbitTrace {
-  fill: none;
-  stroke: rgba(150, 225, 255, .7);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-dasharray: .06 1;
-  filter: drop-shadow(0 0 6px rgba(110, 200, 255, .8));
-  animation: pathRun 14s linear infinite;
-}
-
-.bgOrbitTrace + .bgOrbitTrace {
-  stroke: rgba(241, 212, 154, .6);
-  animation-duration: 22s;
-  animation-direction: reverse;
-}
-
 .bgMote {
   fill: var(--accent);
   opacity: 0;
@@ -758,6 +736,13 @@
   stroke-width: 1;
   stroke-dasharray: 3 8;
   animation: dashFlow 16s linear infinite;
+}
+
+/* Team visual is kept smaller than the other variants and padded so the
+   orbit, floating members and labels stay well inside the banner. */
+.team .visual {
+  max-width: 420px;
+  padding-block: 20px;
 }
 
 .teamStage {
@@ -981,6 +966,7 @@
   .inner { grid-template-columns: 1fr; gap: 48px; }
   .copy { max-width: 680px; }
   .visual { justify-self: center; max-width: 440px; }
+  .team .visual { max-width: 380px; }
   .glowA { width: 480px; height: 480px; }
   .glowB { width: 520px; height: 520px; }
 }
