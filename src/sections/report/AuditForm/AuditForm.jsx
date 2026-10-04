@@ -2,15 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/Icon/Icon";
+import { supabase } from "@/lib/supabase";
 import styles from "./AuditForm.module.css";
 
 // Free report request — animated intro, live 3-step indicator and a layered
 // form card (Contact / Website / Challenge) with "Other" fields that reveal
 // when chosen.
 //
-// NOTE: submission is not connected to any backend yet — handleSubmit only
-// switches to the success state. Wire it to email/CRM before launch.
-
 const industries = ["Professional Services", "Construction", "Healthcare", "Real Estate", "Finance", "E-commerce", "Manufacturing", "Technology", "Hospitality", "Education", "Other"];
 const services = ["Complete Website QA", "Website Redesign", "Performance / UX Review", "Other"];
 const checks = ["Full Website QA", "UI/UX Review", "Mobile Responsiveness", "Design & Layout", "Functionality", "Conversion Review", "Not Sure — Review Everything", "Other"];
@@ -75,7 +73,10 @@ export default function AuditForm() {
   const [focusGroup, setFocusGroup] = useState("contact");
   const [submitted, setSubmitted] = useState(false);
   const [checksError, setChecksError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const groupRefs = useRef({});
+  const submittingRef = useRef(false);
 
   const set = (key) => (e) => setData((d) => ({ ...d, [key]: e.target.value }));
   const toggleCheck = (value) => {
@@ -98,17 +99,55 @@ export default function AuditForm() {
     group.querySelector("input, select, textarea")?.focus({ preventScroll: true });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submittingRef.current) return;
+
+    setSubmitError("");
     if (!data.checks.length) {
       setChecksError(true);
       goTo("challenge");
       return;
     }
-    setSubmitted(true);
+
+    const payload = {
+      first_name: data.first.trim(),
+      last_name: data.last.trim(),
+      email: data.email.trim(),
+      phone: data.phone.trim() || null,
+      website_url: data.url.trim(),
+      industry: data.industry,
+      industry_other: data.industry === "Other" ? data.industryOther.trim() : null,
+      service_needed: data.service,
+      service_other: data.service === "Other" ? data.serviceOther.trim() : null,
+      check_items: data.checks,
+      check_other: data.checks.includes("Other") ? data.checkOther.trim() : null,
+      details: data.message.trim() || null,
+    };
+
+    submittingRef.current = true;
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("qa_report_requests").insert(payload);
+      if (error) throw error;
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Failed to submit QA report request:", error);
+      setSubmitError("We couldn’t send your request right now. Please try again in a moment.");
+    } finally {
+      submittingRef.current = false;
+      setIsSubmitting(false);
+    }
   };
 
-  const reset = () => { setData(initial); setSubmitted(false); setFocusGroup("contact"); };
+  const reset = () => {
+    setData(initial);
+    setSubmitted(false);
+    setChecksError(false);
+    setSubmitError("");
+    setFocusGroup("contact");
+  };
 
   const groupProps = (id) => ({
     ref: (node) => { groupRefs.current[id] = node; },
@@ -180,8 +219,8 @@ export default function AuditForm() {
               {submitted ? (
                 <div className={styles.success} role="status">
                   <span className={styles.successIcon}><Icon name="check" /></span>
-                  <h3>Thanks, {data.first.trim() || "there"} — your request is in.</h3>
-                  <p>We’ll review <strong>{data.url.trim()}</strong> and send your QA report to <strong>{data.email}</strong>.</p>
+                  <h3>Your website review request has been received.</h3>
+                  <p>We’ll review the details and get back to you with the next step.</p>
                   <button type="button" className={styles.again} onClick={reset}>Submit another website</button>
                 </div>
               ) : (
@@ -278,11 +317,12 @@ export default function AuditForm() {
                   </fieldset>
 
                   <div className={styles.submitRow}>
-                    <button className={styles.submit} type="submit">
-                      <span>Get My Free Report</span>
+                    <button className={styles.submit} type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+                      <span>{isSubmitting ? "Submitting..." : "Get My Free Report"}</span>
                       <i><Icon name="arrowRight" /></i>
                     </button>
                     <small>By submitting, you agree to be contacted about your website review.</small>
+                    {submitError && <p className={styles.submitError} role="alert">{submitError}</p>}
                   </div>
                 </form>
               )}

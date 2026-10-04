@@ -580,6 +580,15 @@
 .submit:hover i { transform: translateX(3px) rotate(-8deg); }
 .submit:active { transform: translateY(4px); box-shadow: 0 2px 0 #a87a32, 0 10px 24px rgba(201, 154, 74, .3), inset 0 1px rgba(255, 255, 255, .6); }
 .submit:focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
+.submit:disabled { cursor: wait; filter: saturate(.7); opacity: .72; transform: none; }
+.submit:disabled::after { display: none; }
+
+.submitError {
+  flex: 1 0 100%;
+  margin: 0;
+  color: #a52e28;
+  font: 600 13.5px/1.5 var(--font-ui);
+}
 
 /* ---------- Success ---------- */
 
