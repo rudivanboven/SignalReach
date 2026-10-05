@@ -1,7 +1,5 @@
 import { Manrope, Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/global/Header/Header";
-import Footer from "@/components/global/Footer/Footer";
 
 // Headings & statistics
 const manrope = Manrope({
@@ -33,14 +31,13 @@ export const metadata = {
     "Manual, page-by-page website QA covering design, layout, responsive behavior, content, usability and functionality.",
 };
 
+// Root layout only owns <html>/<body>, fonts and global tokens.
+// The public Header/Footer live in app/(site)/layout.jsx so the private
+// /super-admin area can render its own shell.
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} ${dmSans.variable}`}>
-      <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

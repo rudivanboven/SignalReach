@@ -1,0 +1,61 @@
+/* Admin-only design tokens. Scoped to the /super-admin tree so nothing here
+   leaks into the public website. Brand palette: navy, deep blue, cyan/teal,
+   restrained gold, light surfaces. */
+.root {
+  --a-bg: #f3f6fb;
+  --a-surface: #ffffff;
+  --a-surface-2: #f7f9fc;
+  --a-navy: #0b162b;
+  --a-navy-2: #122443;
+  --a-navy-3: #071225;
+  --a-blue: #2f6bff;
+  --a-cyan: #24b7d8;
+  --a-teal: #0f8f6f;
+  --a-gold: #c99a4a;
+  --a-text: #192335;
+  --a-muted: #667085;
+  --a-faint: #98a2b3;
+  --a-line: rgba(11, 22, 43, 0.1);
+  --a-line-strong: rgba(11, 22, 43, 0.16);
+  --a-danger: #d2403e;
+  --a-danger-bg: rgba(210, 64, 62, 0.1);
+  --a-radius-sm: 10px;
+  --a-radius: 14px;
+  --a-radius-lg: 20px;
+  --a-shadow: 0 1px 2px rgba(8, 20, 40, 0.04), 0 8px 24px rgba(8, 20, 40, 0.05);
+  --a-shadow-hover: 0 2px 4px rgba(8, 20, 40, 0.05), 0 14px 34px rgba(8, 20, 40, 0.09);
+  --a-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--a-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.004em;
+}
+
+/* Public globals set generous marketing sizes on p; reset inside admin. */
+.root p {
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.root h1, .root h2, .root h3, .root h4 {
+  text-wrap: balance;
+}
+
+.root input,
+.root select,
+.root textarea,
+.root button {
+  font-family: var(--font-body);
+}
+
+.root button { font-family: var(--font-ui); }
+
+.root :focus-visible {
+  outline: 2px solid var(--a-blue);
+  outline-offset: 2px;
+}

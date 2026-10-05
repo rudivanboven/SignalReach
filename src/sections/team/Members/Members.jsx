@@ -77,7 +77,7 @@ export default function Members() {
 
         <div className={styles.groupHead}>
           <span className={styles.groupLabel}>Leadership Team</span>
-          <p>The people guiding SignalReach’s strategy, technology, operations and review process.</p>
+          <p>The people guiding SignalReach’s strategy, technology and review process.</p>
         </div>
 
         <div className={styles.cards}>
@@ -85,7 +85,7 @@ export default function Members() {
         </div>
       </div>
 
-      {/* hand-off line into the Specialists section below */}
+      {/* hand-off line into the section below */}
       <div className={styles.divider} aria-hidden="true"><span /></div>
     </section>
   );

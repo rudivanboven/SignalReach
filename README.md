@@ -18,6 +18,7 @@ Open http://localhost:3000
 - `/services` - Services
 - `/about` - About
 - `/free-report` - Free Website Report
+- `/super-admin` - Private Super Admin dashboard (Supabase Auth + RLS; not linked publicly — see `supabase/SUPER_ADMIN_SETUP.md`)
 
 ## Architecture
 
@@ -38,6 +39,9 @@ All sizes, weights, line-heights and letter-spacing are tokens in `src/app/globa
 
 Fonts are loaded using `next/font/google`.
 
-## Static MVP note
+## Supabase
 
-The Free Report form currently shows a local success state only. Connect it later to Supabase, Resend, Formspree, an API route, or your preferred email/database workflow.
+- The Free Report form inserts into `public.qa_report_requests` (anonymous INSERT only).
+- The Super Admin dashboard reads/updates those rows through Row Level Security; only users listed in `public.admin_users` with role `super_admin` get access.
+- Migrations live in `supabase/migrations/`. Admin setup steps: `supabase/SUPER_ADMIN_SETUP.md`.
+- Environment variables: copy `.env.example` to `.env.local`. Only public keys are used — never add the service-role key.

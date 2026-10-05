@@ -20,8 +20,7 @@
 //   accent     role badge colour on the Team page: "gold" | "cyan" | "teal" | "blue"
 //   roleIcon   icon name (components/ui/Icon) shown in the role badge
 //
-// `team` is the Leadership Team — the only members with profile pages.
-// `specialists` (bottom of file) are TEMPORARY placeholder profiles.
+// `team` is the Leadership Team (Rudi + Ayush) — the only members with profile pages.
 
 export const team = [
   {
@@ -31,7 +30,7 @@ export const team = [
     name: "Rudi Van Boven",
     role: "Founder & Chief Executive Officer",
     cardRole: "Founder & CEO",
-    image: "/founder.png",
+    image: "/founder.jpeg",
     imagePosition: "center",
     shortBio: "Rudi is a digital entrepreneur and innovation enthusiast focused on website strategy, emerging technology and turning new digital ideas into practical business opportunities.",
     intro: "Digital entrepreneur and innovation enthusiast focused on turning emerging ideas into practical digital opportunities.",
@@ -111,90 +110,6 @@ export const team = [
     ],
     technologies: ["Webflow", "Squarespace", "React", "Next.js", "JavaScript", "HTML/CSS", "Figma", "Supabase", "GitHub", "Vercel", "Claude", "OpenAI Codex", "Cursor"],
     linkedin: null,
-  },
-  {
-    slug: "alex-carey",
-    accent: "teal",
-    roleIcon: "user",
-    name: "Alex Carey",
-    role: "Head of People & Business Operations",
-    image: "/alex.png",
-    imagePosition: "center 30%",
-    shortBio: "Alex leads SignalReach’s people and business operations, supporting recruitment, project coordination and the first review of new website requests before they move into the full manual QA process.",
-    intro: "Alex brings together people, business operations and project coordination at SignalReach, helping ensure that every new opportunity starts with the right context, clear communication and an organized first review.",
-    bio: [
-      {
-        title: "People & Recruitment",
-        text: "Alex supports the people side of SignalReach, helping identify and coordinate new team members as the company grows. She focuses on creating a strong connection between recruitment, internal communication and the needs of the business.",
-      },
-      {
-        title: "Business Operations",
-        text: "Alongside HR, Alex helps lead business operations and coordinates the early stages of new projects. She works with incoming opportunities to understand the business context, project requirements and what the client is looking to improve.",
-      },
-      {
-        title: "First Website Review",
-        text: "When a new website enters the SignalReach process, Alex performs the initial high-level review. This first pass helps identify the areas that need attention, clarify the scope and prepare the project before it moves into the deeper, full manual QA workflow.",
-      },
-      {
-        title: "Connecting Clients and the QA Team",
-        text: "Alex helps create a smooth handoff between the initial business conversation and the complete review process. Her role helps ensure that the QA team begins with clear context, priorities and a better understanding of the website and its goals.",
-      },
-    ],
-    strengths: [
-      "People Operations",
-      "Recruitment",
-      "Business Operations",
-      "Project Intake",
-      "Client Coordination",
-      "Initial Website Review",
-      "Team Coordination",
-      "Process Management",
-    ],
-    linkedin: null,
-  },
-];
-
-// TEMPORARY PLACEHOLDER PROFILES — demo names, not real SignalReach team
-// members. They exist for layout only until real details are supplied.
-// Replace name/role/text, set `image` (e.g. "/team/<name>.jpg") and remove
-// `temporary: true`. They have no profile pages. "temporary" is never shown
-// on the site.
-export const specialists = [
-  {
-    temporary: true,
-    name: "Sophie Bennett",
-    role: "UI/UX & Usability Specialist",
-    accent: "cyan",
-    roleIcon: "layout",
-    image: null,
-    text: "Focuses on layout, navigation, visual hierarchy and interaction patterns to help create clearer, easier-to-use website experiences.",
-  },
-  {
-    temporary: true,
-    name: "Daniel Brooks",
-    role: "Website QA Specialist",
-    accent: "teal",
-    roleIcon: "scan",
-    image: null,
-    text: "Supports detailed page-by-page website reviews, checking content, links, forms, responsive behavior and common functionality issues.",
-  },
-  {
-    temporary: true,
-    name: "Maya Collins",
-    role: "Content & Conversion Reviewer",
-    accent: "gold",
-    roleIcon: "text",
-    image: null,
-    text: "Reviews messaging, content presentation, calls to action and user journeys to identify opportunities for stronger clarity and engagement.",
-  },
-  {
-    temporary: true,
-    name: "Ethan Parker",
-    role: "Frontend & Responsive Specialist",
-    accent: "blue",
-    roleIcon: "smartphone",
-    image: null,
-    text: "Reviews frontend behavior across desktop, tablet and mobile, focusing on responsive consistency, interactions and implementation quality.",
   },
 ];
 

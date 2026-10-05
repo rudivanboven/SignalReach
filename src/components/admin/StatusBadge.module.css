@@ -1,0 +1,38 @@
+.badge {
+  --tone: #667085;
+  --tone-bg: rgba(102, 112, 133, 0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  min-height: 26px;
+  border-radius: 999px;
+  color: var(--tone);
+  background: var(--tone-bg);
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.badge i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tone);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tone) 18%, transparent);
+}
+
+.sm { min-height: 22px; padding: 0 8px; font-size: 10.5px; gap: 6px; }
+.sm i { width: 6px; height: 6px; }
+
+.new { --tone: #0d8fb0; --tone-bg: rgba(36, 183, 216, 0.14); }
+.contacted { --tone: #a87a2c; --tone-bg: rgba(201, 154, 74, 0.16); }
+.reviewing { --tone: #2f6bff; --tone-bg: rgba(47, 107, 255, 0.12); }
+.progress { --tone: #6b4fd8; --tone-bg: rgba(107, 79, 216, 0.12); }
+.sent { --tone: #0f8f6f; --tone-bg: rgba(15, 143, 111, 0.13); }
+.completed { --tone: #1f7a4d; --tone-bg: rgba(46, 182, 125, 0.16); }
+.neutral { --tone: #667085; --tone-bg: rgba(102, 112, 133, 0.12); }

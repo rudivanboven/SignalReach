@@ -3,7 +3,7 @@ import styles from "./RoleBadge.module.css";
 
 // Shared role/title highlight for Team cards.
 //   variant "lead"   — navy panel with accent icon (Leadership cards)
-//   variant "subtle" — light tinted pill (Specialists)
+//   variant "subtle" — light tinted pill (available for secondary cards)
 //   accent           — "gold" | "cyan" | "teal" | "blue"
 // The light sweep plays once when an ancestor gets [data-inview]; parents can
 // set --badge-lift (e.g. on card hover) to brighten it.
