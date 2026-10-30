@@ -11,7 +11,7 @@ const explore = [
   ["How It Works", "/how-it-works"],
   ["Services", "/services"],
   ["About", "/about"],
-  ["Free Website QA Report", "/free-report"],
+  ["Website QA Report — $45", "/free-report"],
 ];
 
 const review = ["Design & Layout", "Responsive QA", "UI / UX", "Images & Content", "Functional Testing", "Forms & Interactions", "Conversion Flow"];

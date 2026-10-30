@@ -18,10 +18,10 @@ export default function FinalCta() {
       <div className={`container ${styles.inner}`}>
         <span className="eyebrow">Your turn</span>
         <h2>Ready to See What Your Website <span>Is Missing?</span></h2>
-        <p>Submit your website and we’ll manually review the experience page by page, then send you a practical QA report like the example above.</p>
+        <p>Submit your website and we’ll manually review the experience page by page. We’ll send your $45 invoice once the review is ready, before delivering your final report.</p>
         <div className={styles.actions}>
           <Link className="btnSecondary" href="/free-report">
-            Get Your Free QA Report
+            Request Your $45 Website QA Report
             <span className="btnIcon"><Icon name="arrowRight" /></span>
           </Link>
           <a className={`btnGhost ${styles.ghost}`} href={data.meta.docx} download>

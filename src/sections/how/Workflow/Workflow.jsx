@@ -14,8 +14,8 @@ const steps = [
   { icon: "link", title: "Share your website", text: "Submit your URL and tell us what you want to improve." },
   { icon: "scan", title: "We QA the full website", text: "Pages, sections, design, responsiveness, content, images, forms, navigation and functionality." },
   { icon: "alert", title: "We document the issues", text: "Every finding is organized by page, section, severity and impact, with clear visual context." },
-  { icon: "report", title: "You receive the report", text: "Screenshots, clear issue descriptions and practical recommended improvements." },
-  { icon: "sparkle", title: "We can help improve it", text: "If required, we can redesign or implement the recommended fixes in a separate phase." },
+  { icon: "report", title: "We send the $45 invoice", text: "Once your review and report are ready, we’ll send your invoice for payment." },
+  { icon: "sparkle", title: "Your report is delivered", text: "After payment is confirmed, you receive the final report with screenshots, findings and recommended improvements." },
 ];
 
 // Node positions along the path (viewBox 1000 x 120): columns at 10/30/50/70/90%.

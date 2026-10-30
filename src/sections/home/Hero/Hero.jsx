@@ -161,7 +161,7 @@ export default function Hero() {
             We manually review your website page by page and section by section—checking design, layout, mobile responsiveness, images, content, usability, functionality and conversion issues.
           </p>
           <div className={`${styles.actions} ${styles.fade}`} style={{ "--d": ".74s" }}>
-            <Link className="btnSecondary" href="/free-report">Get Your Free Website Report<span className="btnIcon"><Icon name="arrowRight" /></span></Link>
+            <Link className="btnSecondary" href="/free-report">Get Your QA Report<span className="btnIcon"><Icon name="arrowRight" /></span></Link>
             <Link className={`btnGhost ${styles.howBtn}`} href="/how-it-works"><span className={styles.playIcon}><Icon name="play" /></span>See What We Check</Link>
           </div>
           <ul className={`${styles.assurances} ${styles.fade}`} style={{ "--d": ".86s" }}>

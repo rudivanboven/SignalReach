@@ -3,16 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/Icon/Icon";
 import { supabase } from "@/lib/supabase";
+import { checks, EMAIL, industries, services, URL_PATTERN, URL_TEST } from "@/lib/free-report/fields";
 import styles from "./AuditForm.module.css";
 
-// Free report request — animated intro, live 3-step indicator and a layered
+// Website QA report request — animated intro, live 3-step indicator and a layered
 // form card (Contact / Website / Challenge) with "Other" fields that reveal
 // when chosen.
 //
-const industries = ["Professional Services", "Construction", "Healthcare", "Real Estate", "Finance", "E-commerce", "Manufacturing", "Technology", "Hospitality", "Education", "Other"];
-const services = ["Complete Website QA", "Website Redesign", "Performance / UX Review", "Other"];
-const checks = ["Full Website QA", "UI/UX Review", "Mobile Responsiveness", "Design & Layout", "Functionality", "Conversion Review", "Not Sure — Review Everything", "Other"];
-
 const included = ["Page & section layout", "UI design quality", "Mobile responsiveness", "Images & media", "Navigation, buttons & forms", "Content presentation", "UX & conversion flow", "Basic performance & SEO"];
 
 const steps = [
@@ -21,9 +18,30 @@ const steps = [
   { id: "challenge", label: "Challenge", hint: "What would you like us to focus on?" },
 ];
 
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const URL_PATTERN = "(https?://)?([\\w-]+\\.)+[a-zA-Z]{2,}(/\\S*)?";
-const URL_TEST = new RegExp(`^${URL_PATTERN}$`);
+function newSubmissionId() {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
+  const b = crypto.getRandomValues(new Uint8Array(16));
+  b[6] = (b[6] & 0x0f) | 0x40;
+  b[8] = (b[8] & 0x3f) | 0x80;
+  const h = Array.from(b, (x) => x.toString(16).padStart(2, "0")).join("");
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`;
+}
+
+// Team email notification — sent server-side, only after Supabase confirmed the
+// insert. Fire-and-forget: a failed email never affects the visitor's success
+// state (the route logs it). `keepalive` lets it finish if the page is closed.
+function notifyTeam(payload) {
+  try {
+    fetch("/api/free-report/notify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ submission_id: newSubmissionId(), ...payload }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // Never let the notification interfere with the submission.
+  }
+}
 
 const initial = { first: "", last: "", email: "", phone: "", url: "", industry: "", industryOther: "", service: "", serviceOther: "", checks: [], checkOther: "", message: "" };
 
@@ -72,11 +90,16 @@ export default function AuditForm() {
   const [data, setData] = useState(initial);
   const [focusGroup, setFocusGroup] = useState("contact");
   const [submitted, setSubmitted] = useState(false);
+  const [submissionDecision, setSubmissionDecision] = useState(null);
+  const [pendingPayload, setPendingPayload] = useState(null);
+  const [agreementChecked, setAgreementChecked] = useState(false);
   const [checksError, setChecksError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const groupRefs = useRef({});
   const submittingRef = useRef(false);
+  const modalRef = useRef(null);
+  const cancelRef = useRef(null);
 
   const set = (key) => (e) => setData((d) => ({ ...d, [key]: e.target.value }));
   const toggleCheck = (value) => {
@@ -125,13 +148,29 @@ export default function AuditForm() {
       details: data.message.trim() || null,
     };
 
+    setPendingPayload(payload);
+    setAgreementChecked(false);
+  };
+
+  const submitDecision = async (pricingDecision) => {
+    if (!pendingPayload || submittingRef.current) return;
     submittingRef.current = true;
     setIsSubmitting(true);
+    setSubmitError("");
 
     try {
-      const { error } = await supabase.from("qa_report_requests").insert(payload);
+      const decidedPayload = {
+        ...pendingPayload,
+        pricing_decision: pricingDecision,
+        pricing_decision_at: new Date().toISOString(),
+      };
+      const { error } = await supabase.from("qa_report_requests").insert(decidedPayload);
       if (error) throw error;
+      notifyTeam(decidedPayload);
+      setSubmissionDecision(pricingDecision);
       setSubmitted(true);
+      setPendingPayload(null);
+      setAgreementChecked(false);
     } catch (error) {
       console.error("Failed to submit QA report request:", error);
       setSubmitError("We couldn’t send your request right now. Please try again in a moment.");
@@ -144,10 +183,39 @@ export default function AuditForm() {
   const reset = () => {
     setData(initial);
     setSubmitted(false);
+    setSubmissionDecision(null);
+    setPendingPayload(null);
+    setAgreementChecked(false);
     setChecksError(false);
     setSubmitError("");
     setFocusGroup("contact");
   };
+
+  useEffect(() => {
+    if (!pendingPayload) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    cancelRef.current?.focus();
+    const onKeyDown = (event) => {
+      if (event.key === "Escape" && !isSubmitting) {
+        setPendingPayload(null);
+        setAgreementChecked(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = modalRef.current?.querySelectorAll('button:not(:disabled), input:not(:disabled), [href], [tabindex]:not([tabindex="-1"])');
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [pendingPayload, isSubmitting]);
 
   const groupProps = (id) => ({
     ref: (node) => { groupRefs.current[id] = node; },
@@ -178,12 +246,12 @@ export default function AuditForm() {
         {/* ---------- A. Intro ---------- */}
         <div className={styles.intro}>
           <span className="eyebrow">Complete website QA</span>
-          <h2>Request your <span>free website QA report.</span></h2>
-          <p>Three short steps. We’ll manually review your website across design, layout, responsiveness, content, usability and functionality — then show you exactly what to improve.</p>
+          <h2>Request your <span>$45 website QA report.</span></h2>
+          <p>Three short steps. We’ll manually review your website across design, layout, responsiveness, content, usability and functionality. No payment is required when submitting the form; once the review is complete, we’ll send a $45 invoice before delivering your final report.</p>
           <ul className={styles.trust}>
             <li><Icon name="user" />Human-led review</li>
             <li><Icon name="clock" />Target delivery within 6–12 hours</li>
-            <li><Icon name="check" />No obligation, no spam</li>
+            <li><Icon name="check" />Invoice sent before delivery</li>
           </ul>
         </div>
 
@@ -219,8 +287,10 @@ export default function AuditForm() {
               {submitted ? (
                 <div className={styles.success} role="status">
                   <span className={styles.successIcon}><Icon name="check" /></span>
-                  <h3>Your website review request has been received.</h3>
-                  <p>We’ll review the details and get back to you with the next step.</p>
+                  <h3>{submissionDecision === "agreed" ? "Your Website QA Request Is Confirmed" : "Your Website Details Have Been Received"}</h3>
+                  <p>{submissionDecision === "agreed"
+                    ? "We’ll review your website and send the $45 invoice before your completed report is delivered."
+                    : "You haven’t accepted the $45 report charge. Our team may contact you regarding your request."}</p>
                   <button type="button" className={styles.again} onClick={reset}>Submit another website</button>
                 </div>
               ) : (
@@ -318,7 +388,7 @@ export default function AuditForm() {
 
                   <div className={styles.submitRow}>
                     <button className={styles.submit} type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
-                      <span>{isSubmitting ? "Submitting..." : "Get My Free Report"}</span>
+                      <span>{isSubmitting ? "Submitting..." : "Request My QA Report — $45"}</span>
                       <i><Icon name="arrowRight" /></i>
                     </button>
                     <small>By submitting, you agree to be contacted about your website review.</small>
@@ -343,6 +413,54 @@ export default function AuditForm() {
           </aside>
         </div>
       </div>
+      {pendingPayload && (
+        <div className={styles.modalOverlay} role="presentation" onMouseDown={(e) => {
+          if (e.target === e.currentTarget && !isSubmitting) {
+            setPendingPayload(null);
+            setAgreementChecked(false);
+          }
+        }}>
+          <div ref={modalRef} className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="qa-confirm-title" aria-describedby="qa-confirm-copy">
+            <header className={styles.modalHead}>
+              <div>
+                <span>Website QA Report</span>
+                <h2 id="qa-confirm-title">Confirm Your $45 Website QA Report</h2>
+              </div>
+              <strong aria-label="Report price: 45 dollars">$45</strong>
+            </header>
+            <div className={styles.modalBody}>
+              <p id="qa-confirm-copy">SignalReach will manually review your website and prepare your Website QA Report. No payment is required at this stage. Once the review is complete, we’ll send you a $45 invoice. Your final report will be delivered after payment is confirmed.</p>
+              <div className={styles.modalColumns}>
+                <section>
+                  <h3>What’s included</h3>
+                  <ul>{["Manual website QA", "Page and section review", "UI/UX and usability observations", "Mobile responsiveness review", "Functionality checks", "Screenshots and documented findings", "Prioritized recommendations", "Final Website QA Report"].map((item) => <li key={item}><Icon name="check" />{item}</li>)}</ul>
+                </section>
+                <section>
+                  <h3>Payment process</h3>
+                  <ol>
+                    <li><b>1</b>Submit your website</li>
+                    <li><b>2</b>SignalReach completes the review</li>
+                    <li><b>3</b>We send the $45 invoice</li>
+                    <li><b>4</b>After payment, your final report is delivered</li>
+                  </ol>
+                </section>
+              </div>
+              <label className={styles.agreement}>
+                <input type="checkbox" checked={agreementChecked} onChange={(e) => setAgreementChecked(e.target.checked)} disabled={isSubmitting} />
+                <span><i><Icon name="check" /></i>I understand that the Website QA Report costs $45 and that an invoice will be sent before the final report is delivered.</span>
+              </label>
+              {submitError && <p className={styles.modalError} role="alert">{submitError}</p>}
+              <div className={styles.modalActions}>
+                <button ref={cancelRef} type="button" className={styles.modalCancel} onClick={() => submitDecision("declined")} disabled={isSubmitting}>Cancel</button>
+                <button type="button" className={styles.modalConfirm} onClick={() => submitDecision("agreed")} disabled={!agreementChecked || isSubmitting} aria-busy={isSubmitting}>
+                  {isSubmitting ? "Submitting…" : "Agree & Submit Request"}
+                </button>
+              </div>
+              <small className={styles.modalDismiss}>Use Escape or click outside to return to the form without submitting.</small>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

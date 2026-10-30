@@ -118,6 +118,21 @@
   font-size: 11.5px;
 }
 
+.pricingBadge {
+  justify-self: start;
+  margin-top: 2px;
+  padding: 3px 9px;
+  border: 1px solid rgba(15, 143, 111, .22);
+  border-radius: 999px;
+  background: rgba(15, 143, 111, .09);
+  color: #0b785e;
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.pricingBadge[data-decision="declined"] { border-color: rgba(190, 91, 45, .24); background: rgba(190, 91, 45, .09); color: #a04f2c; }
+
 .chev { align-self: center; color: var(--a-faint); transition: transform 200ms var(--a-ease), color 200ms ease; }
 
 @media (max-width: 760px) {

@@ -65,11 +65,11 @@
 }
 
 .homeHeader:not(.scrolled) .desktopCta {
-  color: #fff;
-  border-color: rgba(190, 227, 255, 0.38);
-  background: rgba(18, 39, 91, 0.42);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.12), 0 12px 34px rgba(0, 7, 34, 0.2);
-  backdrop-filter: blur(12px) saturate(135%);
+  color: var(--color-navy);
+  border-color: rgba(241, 212, 154, 0.7);
+  background: linear-gradient(135deg, #f1d49a, #c99a4a);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.42), 0 12px 34px rgba(201, 154, 74, 0.28), 0 0 0 1px rgba(241, 212, 154, 0.12);
+  backdrop-filter: none;
 }
 
 .homeHeader:not(.scrolled) .desktopCta[aria-current="page"] {
@@ -77,9 +77,9 @@
 }
 
 .homeHeader:not(.scrolled) .desktopCta:hover {
-  border-color: rgba(213, 240, 255, 0.62);
-  background: rgba(31, 60, 128, 0.62);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.16), 0 17px 42px rgba(0, 7, 34, 0.28);
+  border-color: rgba(241, 212, 154, 0.9);
+  background: linear-gradient(135deg, #f5dda9, #d5a854);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.48), 0 17px 42px rgba(201, 154, 74, 0.38), 0 0 0 4px rgba(201, 154, 74, 0.12);
 }
 
 .inner {
@@ -160,8 +160,19 @@
   gap: 8px;
   min-height: var(--cta-height) !important;
   padding: 0 var(--cta-pad) !important;
+  color: var(--color-navy);
+  border-color: rgba(201, 154, 74, 0.46);
+  background: linear-gradient(135deg, #f1d49a, #c99a4a);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.42), 0 12px 30px rgba(201, 154, 74, 0.24);
   font-size: var(--cta-font) !important;
   transition: min-height 300ms var(--ease-out), padding 300ms var(--ease-out), font-size 300ms var(--ease-out), transform 250ms ease, box-shadow 250ms ease !important;
+}
+
+.desktopCta:hover {
+  color: var(--color-navy);
+  border-color: rgba(201, 154, 74, 0.7);
+  background: linear-gradient(135deg, #f5dda9, #d5a854);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.48), 0 17px 40px rgba(201, 154, 74, 0.34), 0 0 0 4px rgba(201, 154, 74, 0.1);
 }
 
 .disabledLink,
@@ -226,9 +237,10 @@
   }
 
   .homeHeader:not(.scrolled) .mobileCta {
-    color: #fff !important;
-    border: 1px solid rgba(190, 227, 255, 0.32);
-    background: rgba(71, 116, 210, 0.3) !important;
+    color: var(--color-navy) !important;
+    border: 1px solid rgba(241, 212, 154, 0.62);
+    background: linear-gradient(135deg, #f1d49a, #c99a4a) !important;
+    box-shadow: 0 12px 28px rgba(201, 154, 74, 0.24);
   }
 
   .desktopCta {
@@ -273,8 +285,10 @@
     display: inline-flex !important;
     justify-content: center;
     margin-top: 6px;
-    color: #fff !important;
-    background: var(--color-navy) !important;
+    color: var(--color-navy) !important;
+    border: 1px solid rgba(201, 154, 74, 0.46);
+    background: linear-gradient(135deg, #f1d49a, #c99a4a) !important;
+    box-shadow: 0 10px 24px rgba(201, 154, 74, 0.2);
   }
 }
 

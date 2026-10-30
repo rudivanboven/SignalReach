@@ -292,7 +292,7 @@ export default function InnerHero({
   title,
   accent,
   text,
-  primary = "Get Your Free Website QA Report",
+  primary = "Request Your Website QA Report — $45",
   primaryHref = "/free-report",
   secondary,
   secondaryHref = "/",

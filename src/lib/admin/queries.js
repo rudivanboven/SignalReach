@@ -3,7 +3,7 @@
 // a non-admin session simply gets zero rows / permission errors.
 
 export const REQUEST_COLUMNS =
-  "id, first_name, last_name, email, phone, website_url, industry, industry_other, service_needed, service_other, check_items, check_other, details, status, admin_notes, created_at, updated_at";
+  "id, first_name, last_name, email, phone, website_url, industry, industry_other, service_needed, service_other, check_items, check_other, details, pricing_decision, pricing_decision_at, report_price, status, admin_notes, created_at, updated_at";
 
 export async function fetchRequests(supabase) {
   const { data, error } = await supabase

@@ -28,7 +28,7 @@ You are continuing an existing Next.js App Router project called **SignalReach**
 2. How It Works
 3. Services
 4. About
-5. Free Website Report
+5. Website QA Report — $45
 
 ## Home sections
 
@@ -41,13 +41,13 @@ You are continuing an existing Next.js App Router project called **SignalReach**
 - Why SignalReach / trust
 - Final CTA
 
-## Free Report page
+## Website QA Report page
 
 Use a 40% / 60% layout on desktop:
 - Left: headline, benefits, audit inclusions, trust text, delivery message.
 - Right: premium form card.
 - Fields: Full Name, Business Email, Company Name, Website URL, Industry, Main Goal, Biggest Website Challenges.
-- CTA: `Send My Free Website Report`.
+- CTA: `Request My QA Report — $45`.
 - Secondary CTA: `Book a 15-minute Consultation`.
 - Current version is static. Backend/email/database integration comes later.
 

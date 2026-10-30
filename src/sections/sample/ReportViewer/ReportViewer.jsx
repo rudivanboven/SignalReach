@@ -180,7 +180,7 @@ export default function ReportViewer() {
           </div>
           <div className={styles.barActions}>
             <DownloadButton />
-            <Link className={styles.cta} href="/free-report">Get Your Free QA Report <Icon name="arrowRight" /></Link>
+            <Link className={styles.cta} href="/free-report">Request Your $45 QA Report <Icon name="arrowRight" /></Link>
           </div>
         </div>
 

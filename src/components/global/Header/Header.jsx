@@ -66,11 +66,11 @@ export default function Header() {
             </Link>
           ))}
           <Link className={styles.mobileCta} href="/free-report" aria-current={pathname === "/free-report" ? "page" : undefined} onClick={() => setOpen(false)}>
-            Get Your Free QA Report
+            QA Report
           </Link>
         </nav>
         <Link className={`btnPrimary ${styles.desktopCta}`} href="/free-report" aria-current={pathname === "/free-report" ? "page" : undefined}>
-          Get Your Free QA Report
+          QA Report
           <span aria-hidden="true">↗</span>
         </Link>
       </div>

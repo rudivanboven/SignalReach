@@ -34,6 +34,11 @@ export default function RequestCard({ request: r, selected, onSelect }) {
           <LocalTime value={r.created_at} />
           {r.admin_notes && <em title="Has admin notes"><AdminIcon name="notes" size={13} /> Notes</em>}
         </span>
+        {r.pricing_decision && (
+          <span className={styles.pricingBadge} data-decision={r.pricing_decision}>
+            $45 {r.pricing_decision === "agreed" ? "Agreed" : "Declined"}
+          </span>
+        )}
       </span>
 
       <AdminIcon name="arrowRight" size={16} className={styles.chev} />

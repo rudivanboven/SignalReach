@@ -26,7 +26,7 @@ export default function AuditPreview() {
               <span>✓ Critical-to-low severity</span>
               <span>✓ Clear improvement recommendation</span>
             </div>
-            <Link className="btnPrimary" href="/free-report">Get My Free Report <span className="btnIcon"><Icon name="arrowRight" /></span></Link>
+            <Link className="btnPrimary" href="/free-report">Request My QA Report — $45 <span className="btnIcon"><Icon name="arrowRight" /></span></Link>
           </div>
         </Reveal>
         <Reveal delay={140}>

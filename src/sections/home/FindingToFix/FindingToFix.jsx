@@ -86,7 +86,7 @@ export default function FindingToFix() {
           <div className={styles.ctaInner}>
             <h2>Ready To See What Your Website Needs?</h2>
             <div className={styles.ctaActions}>
-              <Link className="btnSecondary" href="/free-report">Get Your Free Website QA Report <span className="btnIcon"><Icon name="arrowRight" /></span></Link>
+              <Link className="btnSecondary" href="/free-report">Request Your Website QA Report — $45 <span className="btnIcon"><Icon name="arrowRight" /></span></Link>
               <Link className="btnGhost" href="/how-it-works">See How It Works</Link>
             </div>
           </div>

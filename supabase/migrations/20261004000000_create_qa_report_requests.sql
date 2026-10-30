@@ -1,4 +1,4 @@
--- Public form submissions for the "Get Your Free QA Report" form.
+-- Public form submissions for the Website QA Report form.
 -- Anonymous clients can submit form fields only; private records cannot be read.
 
 create table if not exists public.qa_report_requests (

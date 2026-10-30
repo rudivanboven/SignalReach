@@ -67,7 +67,7 @@ export default function Overview({ requests, loadError }) {
         <div className={styles.empty}>
           <span className={styles.emptyIcon}><AdminIcon name="inbox" size={26} /></span>
           <h2>No QA requests yet.</h2>
-          <p>New submissions from the “Get Your Free QA Report” form will appear here automatically.</p>
+          <p>New Website QA Report requests will appear here automatically.</p>
         </div>
       ) : (
         <div className={styles.columns}>

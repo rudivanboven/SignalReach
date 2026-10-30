@@ -195,6 +195,15 @@ export default function RequestDetail({ request: r, saving, onClose, onUpdate, o
           <Row label="Additional details">{r.details ? <span className={styles.prose}>{r.details}</span> : null}</Row>
         </Section>
 
+        <Section icon="tag" title="Pricing">
+          <Row label="Report price">${Number(r.report_price || 45).toFixed(0)}</Row>
+          <Row label="Pricing agreement">
+            {r.pricing_decision ? <span className={styles.pricingDecision} data-decision={r.pricing_decision}>{r.pricing_decision}</span> : "Not recorded"}
+          </Row>
+          <Row label="Decision date">{r.pricing_decision_at ? <LocalDate value={r.pricing_decision_at} withTime /> : null}</Row>
+          {r.pricing_decision === "declined" && <Row label="Follow-up note"><span className={styles.declinedNote}>Customer submitted the request but did not accept the $45 report charge.</span></Row>}
+        </Section>
+
         <Section icon="clock" title="Submission">
           <Row label="Date"><LocalDate value={r.created_at} /></Row>
           <Row label="Time"><LocalTime value={r.created_at} /></Row>

@@ -14,7 +14,7 @@ export default function FinalCTA() {
             <h2>Ready to see what your website is really missing?</h2>
             <p>Share your URL and we’ll manually QA the pages, sections and interactions that shape your complete website experience.</p>
             <div className={styles.actions}>
-              <Link className="btnSecondary" href="/free-report">Get Your Free Website QA Report <span className="btnIcon"><Icon name="arrowRight" /></span></Link>
+              <Link className="btnSecondary" href="/free-report">Request Your Website QA Report — $45 <span className="btnIcon"><Icon name="arrowRight" /></span></Link>
               <Link className={`linkArrow ${styles.textLink}`} href="/services">See What We Check <Icon name="arrowRight" /></Link>
             </div>
           </div>

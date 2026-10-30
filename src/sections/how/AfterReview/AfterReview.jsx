@@ -60,7 +60,7 @@ export default function AfterReview() {
           </div>
           <div className={styles.actions}>
             <Link className="btnSecondary" href="/free-report">
-              Get Your Free Website QA Report
+              Request Your Website QA Report — $45
               <span className="btnIcon"><Icon name="arrowRight" /></span>
             </Link>
             <Link className={`btnGhost ${styles.ghost}`} href="/services">See What We Check</Link>

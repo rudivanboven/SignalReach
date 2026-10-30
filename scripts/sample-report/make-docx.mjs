@@ -293,7 +293,7 @@ const about = [
       children: [cell([
         p([run("Ready to see what your website is missing?", { bold: true, size: 30, color: "FFFFFF" })], { spacing: { after: 120 } }),
         p([run("Submit your website and we’ll manually review the experience page by page, then send you a practical QA report like this example.", { size: 21, color: "C9D6F2" })], { spacing: { after: 200 } }),
-        p([run("Get Your Free QA Report  →  SignalReach website › Get Your Free QA Report", { bold: true, size: 20, color: "F1D49A" })]),
+        p([run("Request Your Website QA Report — $45  →  SignalReach website › Website QA Report", { bold: true, size: 20, color: "F1D49A" })]),
       ], { width: CONTENT, fill: NAVY, borders: noBorders, margins: { top: 360, bottom: 360, left: 420, right: 420 } })],
     }),
   ], [CONTENT]),

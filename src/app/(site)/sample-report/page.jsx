@@ -19,7 +19,7 @@ export default function SampleReportPage() {
         title="See Exactly What Your Website"
         accent="QA Report Will Look Like."
         text="Before you submit your website, explore a sample SignalReach QA report and see how we document design, usability, responsiveness, content and functionality issues with screenshots and practical recommendations."
-        primary="Get Your Free QA Report"
+        primary="Request Your $45 QA Report"
         primaryHref="/free-report"
         secondary="View Sample Report"
         secondaryHref="#report"
